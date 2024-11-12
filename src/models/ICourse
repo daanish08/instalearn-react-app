@@ -2,7 +2,9 @@ export interface ICourse {
   id: number;
   courseName: string;
   instructor: string;
-  phone: string;
+  description: string;
   duration: string; 
-  imageUrl: string; 
+  imageUrl: string;
+  githubURL: string;
+  driveURL: string; 
 }
