@@ -2,9 +2,11 @@ import { Link } from "react-router-dom";
 import MenuList from "./menulist";
 
 function Header() {
-
   return (
-    <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <nav
+      className="navbar navbar-expand-md navbar-dark fixed-top"
+      style={{ backgroundColor: "#211266" }}
+    >
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           INSTA LEARN APP
@@ -29,4 +31,3 @@ function Header() {
 }
 
 export default Header;
-

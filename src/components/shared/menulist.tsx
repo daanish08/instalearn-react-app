@@ -1,10 +1,6 @@
+import { NavLink } from "react-router-dom";
 
-import { NavLink, useLocation } from "react-router-dom";
-
-// Function components with Arrow Function
 const MenuList = () => {
-  const location = useLocation();
-
   return (
     <ul className="navbar-nav me-auto mb-2 mb-md-0">
       <li className="nav-item">

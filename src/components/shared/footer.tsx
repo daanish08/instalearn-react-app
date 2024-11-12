@@ -1,13 +1,15 @@
 import MenuList from "./menulist";
 
-
 // Function components with Anonymous Function
 const Footer = function () {
   const copyrightYear = 2024;
 
   // it must return jsx
   return (
-    <footer className="text-center">
+    <footer
+      className="text-center"
+      style={{ backgroundColor: "#211266", color: "white" }}
+    >
       <div>
         <hr />
         <p>
