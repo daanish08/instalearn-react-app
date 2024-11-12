@@ -1,5 +1,17 @@
 import { Link } from "react-router-dom";
 
+const getRandomGradient = () => {
+  const gradients = [
+    "linear-gradient(135deg, #2C3E50, #4CA1AF)", // Dark blue to teal
+    "linear-gradient(135deg, #232526, #414345)", // Dark gray to lighter gray
+    "linear-gradient(135deg, #0F2027, #2C5364)", // Black to dark cyan
+    "linear-gradient(135deg, #3A1C71, #D76D77)", // Dark purple to dark pink
+    "linear-gradient(135deg, #1C1C1C, #383838)", // Dark gray to medium gray
+  ];
+
+  return gradients[Math.floor(Math.random() * gradients.length)];
+};
+
 const About = () => {
   const MissionVisions = [
     {
@@ -13,6 +25,39 @@ const About = () => {
         "To revolutionize education by creating a world where learning is accessible, engaging, and transformative for everyone.",
     },
   ];
+
+  const developerData = [
+    {
+      profile: "src/assets/image/hero.jpg",
+      name: "Mohammed Daanish M",
+      title: "Software Engineer",
+      company: "Ford Motors Company",
+    },
+    {
+      profile: "src/assets/image/hero.jpg",
+      name: "Vignesh U",
+      title: "Software Engineer",
+      company: "Ford Motors Company",
+    },
+    {
+      profile: "src/assets/image/hero.jpg",
+      name: "Tharun D",
+      title: "Software Engineer",
+      company: "Ford Motors Company",
+    },
+    {
+      profile: "src/assets/image/hero.jpg",
+      name: "Suriya T",
+      title: "Software Engineer",
+      company: "Ford Motors Company",
+    },
+  ];
+
+  // const cardStyle = {
+  //   borderRadius: "10px",
+  //   overflow: "hidden",
+  //   boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+  // };
   return (
     <>
       <div style={{ backgroundColor: "#211266" }}>
@@ -76,6 +121,42 @@ const About = () => {
                     alt="About Image"
                     className="img-fluid rounded"
                   />
+                </div>
+
+                <div className="row">
+                  {developerData.map((developer) => {
+                    const cardStyle = {
+                      background: getRandomGradient(),
+                      width: "100%",
+                      // margin: "10px",
+                      borderRadius: "10px",
+                      color: "white",
+                    };
+
+                    return (
+                      <div className="col-md-12 px-5 py-4">
+                        <div className="card" style={cardStyle}>
+                          <img
+                            src={developer.profile}
+                            className="card-img-top"
+                            alt={developer.name}
+                            style={{
+                              borderTopLeftRadius: "10px",
+                              borderTopRightRadius: "10px",
+                            }}
+                          />
+                          <div className="card-body">
+                            <h5 className="card-title fw-bold fs-4">
+                              {developer.name}
+                            </h5>
+                            <p className="card-text">
+                              {developer.title} | {developer.company}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </article>
             </main>

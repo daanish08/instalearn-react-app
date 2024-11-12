@@ -21,7 +21,7 @@ const Contact = () => {
 
   return (
     <>
-      <div className="bg-about px-3">
+      <div style={{ backgroundColor: "#211266" }}>
         <div className="px-4 py-5 my-3 mt-0 text-center text-white">
           <h1 className="display-3 text-white pb-5 fw-light">Contact</h1>
           <h3 className="display-5 text-white pb-5 fw-semibold">
