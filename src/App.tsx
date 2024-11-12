@@ -9,6 +9,7 @@ import About from "./pages/About";
 import Admin from "./pages/Admin";
 import User from "./pages/User";
 import Contact from "./pages/Contact";
+import CourseDetails from "./components/courses/CourseDetails";
 
 const App = () => {
   return(
@@ -19,6 +20,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/courses" element={<Courses />} />
+          <Route path="/course/:id" element={<CourseDetails />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin" element={<Admin />} />
