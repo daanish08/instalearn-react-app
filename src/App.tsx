@@ -1,20 +1,33 @@
-import './App.css'
-import Header from './components/shared/header';
-import Footer from './components/shared/footer';
-import MenuList from './components/shared/menulist'; // If you have a menu list to include
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.css";
+import Header from "./components/shared/header";
+import Footer from "./components/shared/footer";
+import Home from "./pages/Home";
+import Courses from "./pages/Courses";
+import About from "./pages/About";
+import Admin from "./pages/Admin";
+import User from "./pages/User";
+import Contact from "./pages/Contact";
 
 const App = () => {
-  return (
-    <div className="hero-container">
-      <Header />
-      <main className="content">
-        <h2>Welcome to my website!</h2>
-        <p>Here is some main content...</p>
-        <MenuList /> {/* Include your menu list if needed */}
+  return(
+    <BrowserRouter>
+     <Header/>
+     <main className="container mt-5 pt-2">
+        {/* Routing configuration */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/user" element={<User />} />
+        </Routes>
       </main>
-      <Footer />
-    </div>
-  );
+     <Footer />
+    </BrowserRouter>
+  )
 };
 
 export default App;
