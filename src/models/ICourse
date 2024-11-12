@@ -1,0 +1,8 @@
+export interface ICourse {
+  id: number;
+  courseName: string;
+  instructor: string;
+  phone: string;
+  duration: string; 
+  imageUrl: string; 
+}
