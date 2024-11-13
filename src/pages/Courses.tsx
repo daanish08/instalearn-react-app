@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import CourseCard from "../components/courses/CourseCard";
 
 
-const Employees = () => {
+const Courses = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [courseList, setCourseList] = useState<ICourse[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -166,4 +166,4 @@ const Employees = () => {
   );
 };
 
-export default Employees;
+export default Courses;
