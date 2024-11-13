@@ -18,7 +18,7 @@ import CourseForm from "./components/courses/CourseForm";
 const App = () => {
   return (
     <BrowserRouter>
-      <main className="mt-5 pt-2">
+      <main className="mt-5 pt-2 bg-body-tertiary">
         <Header />
         {/* Routing configuration */}
         <Routes>
