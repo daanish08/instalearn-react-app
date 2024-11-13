@@ -7,28 +7,30 @@ interface Enrollment {
   status: string;
 }
 
-const mockEnrollments: Enrollment[] = [
-  { id: 1, username: 'john_doe', courseTitle: 'React Basics', status: 'Pending' },
-  { id: 2, username: 'jane_smith', courseTitle: 'Advanced Angular', status: 'Approved' },
-  { id: 3, username: 'alice_jones', courseTitle: 'Vue Mastery', status: 'Rejected' },
-  // Add more mock data as needed
-];
-
 const ApproveCourses: React.FC = () => {
   const [enrollments, setEnrollments] = useState<Enrollment[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     loadEnrollmentList();
   }, []);
 
-  const loadEnrollmentList = () => {
-    // Simulate fetching data from a service
-    setEnrollments(mockEnrollments);
-    console.log('Loaded enrollments:', mockEnrollments);
+  const loadEnrollmentList = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/instalearn/admin/A1/approvals');
+      if (!response.ok) {
+        throw new Error(`Error fetching enrollments: ${response.statusText}`);
+      }
+      const data: Enrollment[] = await response.json();
+      setEnrollments(data);
+    } catch (error) {
+      setError(error.message);
+      console.error('Error loading enrollments:', error);
+    }
   };
 
   const updateStatus = (updatedEnrollment: Enrollment) => {
-    // Logic to update enrollment status
+    // Implement logic to update the enrollment status, possibly involving another API call
     console.log('Update Status:', updatedEnrollment);
     setEnrollments((prevEnrollments) =>
       prevEnrollments.map((enr) =>
@@ -36,6 +38,10 @@ const ApproveCourses: React.FC = () => {
       )
     );
   };
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <div className="container-fluid mt-4 px-5">
