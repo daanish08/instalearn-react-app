@@ -15,13 +15,13 @@ const getRandomGradient = () => {
   return gradients[Math.floor(Math.random() * gradients.length)];
 };
 
-const Employees = () => {
+const Courses = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [courseList, setCourseList] = useState<ICourse[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    async function getEmployees() {
+    async function getCourses() {
       try {
         const response = await axios.get(
           "http://localhost:8080/instalearn/api/v1/course/list"
@@ -34,7 +34,7 @@ const Employees = () => {
         setError("Failed to fetch course data. Please try again later.");
       }
     }
-    getEmployees();
+    getCourses();
   }, []);
 
   const navigate = useNavigate();
@@ -178,4 +178,4 @@ const Employees = () => {
   );
 };
 
-export default Employees;
+export default Courses;
