@@ -47,6 +47,7 @@ const Courses = () => {
   const handleUpdate = (id: string) => {
     // Implement update functionality here
     console.log(`Update course with id: ${id}`);
+    navigate(`/courses/update/${id}`);
   };
 
   const handleDelete = async (id: string) => {
@@ -105,7 +106,7 @@ const Courses = () => {
               >
                 <div className="card" style={cardStyle}>
                   <img
-                    src={course.imageUrl || "src/assets/image/Course-logo.png"}
+                    src={course.courseURL || "src/assets/image/Course-logo.png"}
                     className="card-img-top"
                     alt={course.courseName}
                     style={{

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { ICourse } from "../models/ICourse.ts";
+import { ICourse } from "../../models/ICourse";
 
 const CourseDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -51,7 +51,7 @@ const CourseDetails = () => {
         <>
           <div className="card mb-3">
             <img
-              src={course.imageUrl || "src/assets/image/Course-logo.png"}
+              src={course.courseURL || "src/assets/image/Course-logo.png"}
               className="card-img-top"
               alt={course.courseName}
               style={{ maxHeight: "400px", objectFit: "cover" }}

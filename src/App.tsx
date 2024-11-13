@@ -13,6 +13,7 @@ import UserList from "./components/admin/UserList";
 import Header from "./components/shared/header";
 import Footer from "./components/shared/footer";
 import PendingEnrollments from "./components/admin/PendingEnrollments";
+import UpdateCourse from "./components/courses/UpdateCourse";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/courses/:id" element={<CourseDetails />} />
+          <Route path="/courses/update/:id" element={<UpdateCourse />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route

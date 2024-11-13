@@ -4,7 +4,7 @@ export interface ICourse {
   instructor: string;
   description: string;
   duration: string; 
-  imageUrl: string;
+  courseURL: string;
   githubURL: string;
   driveURL: string; 
 }
