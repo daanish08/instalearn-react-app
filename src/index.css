@@ -1,46 +1,28 @@
-.hero-container {
-  position: relative;
-  background: rgb(2, 0, 36);
-  background: linear-gradient(
-    45deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(9, 9, 121, 1) 10%,
-    rgba(0, 212, 255, 1) 100%
-  );
-  
-  /* background-image: url('https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/60107ed479293a1144ffceab_6002086f72b7275b5801e725_website-hero-image.jpeg'); */
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  color: white; /* Ensure text color contrasts with the background */
+
+.gradient-background {
+  background: linear-gradient(to bottom, #1e1357,white); 
 }
 
-.header,
-.footer {
-  position: absolute;
-  width: 100%;
-  background: rgba(
-    0,
-    0,
-    0,
-    0
-  ); /* Semi-transparent background for better readability */
-  text-align: center;
-  /* padding: 1rem; */
+.gradient-text {
+  background: linear-gradient(to bottom, #1e1357, #4a90e2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }
 
-.header {
-  top: 0;
+.bg-menu-btn{
+  background-color: #bbb8cc;
 }
 
-.footer {
-  bottom: 0;
+
+.text-navy{
+  color:#1e1357;
 }
 
-.content {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  text-align: center;
-  /* padding: 2rem; */
+.bg-btn{
+  background-color:#1e1357;
+}
+.bg-navy{
+  background-color:#1e1357;
 }

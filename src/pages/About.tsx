@@ -53,17 +53,12 @@ const About = () => {
     },
   ];
 
-  // const cardStyle = {
-  //   borderRadius: "10px",
-  //   overflow: "hidden",
-  //   boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-  // };
   return (
     <>
-      <div style={{ backgroundColor: "#211266" }}>
-        <div className="px-4 py-5 my-3 mt-0 text-center text-white  ">
-          <h1 className="display-3  pb-5 fw-light">About</h1>
-          <h3 className="display-5  pb-5 fw-semibold">
+      <div className="gradient-background text-navy" >
+        <div className="px-4   mt-0 text-center" style={{paddingTop:"100px"}}>
+          <h1 className="display-2  pb-5  fw-semibold  ">ABOUT</h1>
+          <h3 className="display-5  pb-5  fw-semibold gradient-text">
             "We are an online community dedicated to making language learning
             engaging and accessible for everyone."
           </h3>
@@ -72,7 +67,7 @@ const About = () => {
               xmlns="http://www.w3.org/2000/svg"
               width="30"
               height="30"
-              fill="white"
+              fill="navy"
               className="bi bi-arrow-down-circle-fill"
               viewBox="0 0 16 16"
             >
@@ -128,33 +123,33 @@ const About = () => {
                     const cardStyle = {
                       background: getRandomGradient(),
                       width: "100%",
-                      // margin: "10px",
+                      height:"205px",
                       borderRadius: "10px",
                       color: "white",
                     };
 
                     return (
-                      <div className="col-md-12 px-5 py-4">
-                        <div className="card" style={cardStyle}>
+                      <div className="col-md-12 px-5 py-3">
+                      <div className="card border-0" style={cardStyle}>
+                        <div className="d-flex flex-row justify-content-between"> {/* Added classes */}
                           <img
                             src={developer.profile}
-                            className="card-img-top"
+                            className="card-img-top img-fluid px-2 py-2" 
                             alt={developer.name}
                             style={{
-                              borderTopLeftRadius: "10px",
-                              borderTopRightRadius: "10px",
+                              borderRadius: "10px",
+                              maxHeight: "200px",  // Adjust as needed
+                              width:"200px",
+                              objectFit: "cover", // Prevents distortion
                             }}
                           />
-                          <div className="card-body">
-                            <h5 className="card-title fw-bold fs-4">
-                              {developer.name}
-                            </h5>
-                            <p className="card-text">
-                              {developer.title} | {developer.company}
-                            </p>
+                          <div className="card-body pt-5">
+                            <h5 className="card-title fw-bold fs-3">{developer.name}</h5>
+                            <p className="card-text ">{developer.title} | {developer.company}</p>
                           </div>
                         </div>
                       </div>
+                    </div>                    
                     );
                   })}
                 </div>

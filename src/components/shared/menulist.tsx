@@ -2,39 +2,39 @@ import { NavLink } from "react-router-dom";
 
 const MenuList = () => {
   return (
-    <ul className="navbar-nav me-auto mb-2 mb-md-0">
-      <li className="nav-item">
-        <NavLink className="nav-link" aria-current="page" to="/">
+    <ul className="navbar-nav justify-content-end mb-2 ms-auto gap-4 mb-md-0">
+      <li className="nav-item ">
+        <NavLink className="nav-link text-white" aria-current="page" to="/">
           Home
         </NavLink>
       </li>
 
       <li className="nav-item">
-        <NavLink className="nav-link" aria-current="page" to="/courses">
+        <NavLink className="nav-link text-white" aria-current="page" to="/courses">
           Courses
         </NavLink>
       </li>
 
       <li className="nav-item">
-        <NavLink className="nav-link" aria-current="page" to="/about">
+        <NavLink className="nav-link text-white" aria-current="page" to="/about">
           About
         </NavLink>
       </li>
 
       <li className="nav-item">
-        <NavLink className="nav-link" aria-current="page" to="/contact">
+        <NavLink className="nav-link text-white" aria-current="page" to="/contact">
           Contact
         </NavLink>
       </li>
 
       <li className="nav-item">
-        <NavLink className="nav-link" aria-current="page" to="/admin">
+        <NavLink className="nav-link text-white" aria-current="page" to="/admin/login">
           Admin
         </NavLink>
       </li>
 
       <li className="nav-item">
-        <NavLink className="nav-link" aria-current="page" to="/user">
+        <NavLink className="nav-link text-white" aria-current="page" to="/user/login">
           User
         </NavLink>
       </li>

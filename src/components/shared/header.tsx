@@ -4,11 +4,10 @@ import MenuList from "./menulist";
 function Header() {
   return (
     <nav
-      className="navbar navbar-expand-md navbar-dark fixed-top"
-      style={{ backgroundColor: "#211266" }}
+      className="navbar navbar-expand-md  bg-navy fixed-top pt-3"
     >
-      <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
+      <div className="container-fluid ">
+        <Link className="navbar-brand text-white" to="/">
           INSTA LEARN APP
         </Link>
         <button

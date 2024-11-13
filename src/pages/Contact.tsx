@@ -21,11 +21,11 @@ const Contact = () => {
 
   return (
     <>
-      <div style={{ backgroundColor: "#211266" }}>
-        <div className="px-4 py-5 my-3 mt-0 text-center text-white">
-          <h1 className="display-3 text-white pb-5 fw-light">Contact</h1>
-          <h3 className="display-5 text-white pb-5 fw-semibold">
-            Join our vibrant online language learning community and connect with us
+      <div className="gradient-background text-navy" >
+        <div className="px-4   mt-0 text-center" style={{paddingTop:"100px"}}>
+          <h1 className="display-2  pb-5  fw-semibold  ">CONTACT</h1>
+          <h3 className="display-5  pb-5  fw-semibold gradient-text">
+            "Join our vibrant online language learning community and  connect <br/>with us."
           </h3>
           <a href="#form">
             <svg

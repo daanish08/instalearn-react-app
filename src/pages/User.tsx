@@ -25,7 +25,8 @@ const User = () => {
   ];
 
   return (
-    <div className="container-fluid px-5 bg-body-tertiary">
+    <div className="bg-body-tertiary">
+    <div className="container bg-body-tertiary">
       <h1 className="text-left fw-light pt-4 pb-4">
         Welcome, <span className="fw-bold text-success">{userName}</span>
       </h1>
@@ -83,7 +84,9 @@ const User = () => {
         </div>
       </div>
     </div>
+    </div>
   );
 };
+
 
 export default User;

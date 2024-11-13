@@ -7,15 +7,16 @@ const Footer = function () {
   // it must return jsx
   return (
     <footer
-      className="text-center"
-      style={{ backgroundColor: "#211266", color: "white" }}
+      className="text-center bg-navy"
+      style={{  color: "white" }}
     >
       <div>
-        <hr />
+      <MenuList />
+        <br />
         <p>
-          <b>&copy;</b>copyright {copyrightYear} | <b>INSTA LEARN APP</b>
+          <b>&copy;</b>Copyright {copyrightYear} | <b>INSTA LEARN</b>
         </p>
-        <MenuList />
+        
       </div>
     </footer>
   );
