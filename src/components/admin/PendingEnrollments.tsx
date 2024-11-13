@@ -44,11 +44,11 @@ const ApproveCourses: React.FC = () => {
   }
 
   return (
-    <div className="container-fluid mt-4 px-5">
-      <h2 className="text-left fw-light">
-        Approve <span className="fw-semibold text-success">Enrollment Status</span>
-        <hr />
-      </h2>
+    <div className="container py-3">
+    <h1 className="pt-3 pb-2 gradient-text">
+      <span className="fw-light">Approve</span> Enrollment Status
+      <hr className="text-navy" />
+    </h1>
 
       <table className="table table-bordered mt-4 table-hover">
         <thead className="table-success" style={{ color: 'blue' }}>
@@ -89,7 +89,8 @@ const ApproveCourses: React.FC = () => {
               </td>
               <td>
                 <button
-                  className="btn btn-success"
+                  className="bg-navy border-0 py-1 mb-3  rounded-pill text-white px-3"
+                  style={{ backgroundColor: "#000B58" }}
                   onClick={() => updateStatus(enrollment)}
                 >
                   Update
