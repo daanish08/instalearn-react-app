@@ -1,5 +1,5 @@
 export interface ICourse {
-  id: number;
+  courseId: string;
   courseName: string;
   instructor: string;
   description: string;

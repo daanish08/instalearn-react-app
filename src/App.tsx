@@ -10,8 +10,8 @@ import LoginComponent from "./components/shared/Login";
 import Signup from "./components/shared/Signup";
 import GenerateCertificate from "./pages/GenerateCertificate";
 import UserList from "./components/admin/UserList";
-import Header from "./components/shared/Header";
-import Footer from "./components/shared/Footer";
+import Header from "./components/shared/header";
+import Footer from "./components/shared/footer";
 import PendingEnrollments from "./components/admin/PendingEnrollments";
 
 const App = () => {

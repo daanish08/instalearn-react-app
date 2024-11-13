@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { ICourse } from "../models/ICourse";
+import { ICourse } from "../models/ICourse.ts";
 
 const CourseDetails = () => {
   const { id } = useParams<{ id: string }>();
