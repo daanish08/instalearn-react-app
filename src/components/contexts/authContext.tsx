@@ -6,15 +6,14 @@ import React, {
   useEffect,
   ReactNode,
 } from "react";
+import { jwtDecode, JwtPayload } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
-// Define the User type
 interface User {
   id: number;
-  name: string;
-  email: string;
+  role: "USER" | "ADMIN";
 }
 
-// Define the AuthContext type
 interface AuthContextType {
   user: User | null;
   login: (credentials: { email: string; password: string }) => Promise<void>;
@@ -22,10 +21,8 @@ interface AuthContextType {
   loading: boolean;
 }
 
-// Create the AuthContext with the AuthContextType
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Custom hook to use the AuthContext
 export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
   if (context === undefined) {
@@ -34,39 +31,52 @@ export const useAuth = (): AuthContextType => {
   return context;
 };
 
-// AuthProvider component
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
+  const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  // Function to log in a user
+  const navigateBasedOnRole = (role: string) => {
+    if (role === "USER") navigate("/user/dashboard");
+    else if (role === "ADMIN") navigate("/admin/dashboard");
+  };
+
   const login = async (credentials: {
     email: string;
     password: string;
   }): Promise<void> => {
     try {
-      // Example API call
       const response = await handleLoginApi(credentials);
-      setUser(response.user);
-      localStorage.setItem("user", JSON.stringify(response.user)); // Save user to localStorage
+      const token = response.data.jwt;
+      const decodedToken: any = jwtDecode(token) as JwtPayload;
+
+      const user = {
+        id: decodedToken.sub,
+        role: decodedToken.role,
+      };
+
+      setUser(user);
+      if (user) localStorage.setItem("user", JSON.stringify(user));
+
+      navigateBasedOnRole(decodedToken.role);
     } catch (error) {
       console.error("Failed to login:", error);
     }
   };
 
-  // Function to log out a user
   const logout = (): void => {
     setUser(null);
-    localStorage.removeItem("user"); // Remove user from localStorage
+    localStorage.removeItem("user");
   };
 
-  // Check if user is authenticated on component mount
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      const userDetails = JSON.parse(storedUser);
+      setUser(userDetails);
+      navigateBasedOnRole(userDetails.role);
     }
     setLoading(false);
   }, []);
@@ -78,13 +88,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   );
 };
 
-// A fake API login function to simulate authentication
 const handleLoginApi = async (credentials: {
   email: string;
   password: string;
-}): Promise<{ user: User }> => {
-  return axios.post(
-    "https://localhost:8080/instalearn/auth/login",
-    credentials
-  );
+}): Promise<{ data: { jwt: string } }> => {
+  return axios.post("http://localhost:8080/instalearn/auth/login", credentials);
 };
