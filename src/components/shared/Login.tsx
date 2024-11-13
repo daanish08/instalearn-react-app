@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import loginImg from "../../assets/image/login.jpg";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/authContext";
+import { Helmet } from "react-helmet-async";
 
 interface ICredentials {
   email: string;
@@ -13,6 +14,8 @@ interface LoginComponentProps {
 }
 
 const LoginComponent = ({ userType }: LoginComponentProps) => {
+  const capitalizedUserType =
+    userType.charAt(0).toUpperCase() + userType.slice(1);
   const {
     register,
     handleSubmit,
@@ -30,6 +33,9 @@ const LoginComponent = ({ userType }: LoginComponentProps) => {
       className="login-page d-flex bg-body-tertiary"
       style={{ height: "580px" }}
     >
+      <Helmet>
+        <title>{capitalizedUserType} Login</title>
+      </Helmet>
       <div className="col-md-6 login-image">
         <img src={loginImg} width={600} height={580} />
       </div>

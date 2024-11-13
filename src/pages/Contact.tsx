@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    contact: '',
-    comment: '',
-    enquiryType: 'Feedback',
+    name: "",
+    contact: "",
+    comment: "",
+    enquiryType: "Feedback",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -16,16 +21,24 @@ const Contact = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Handle form submission logic here
-    console.log('Form submitted:', formData);
+    console.log("Form submitted:", formData);
   };
 
   return (
     <>
-      <div className="gradient-background text-navy" >
-        <div className="px-4   mt-0 text-center" style={{paddingTop:"100px"}}>
+      <Helmet>
+        <title>Contact</title>
+      </Helmet>
+      <div className="gradient-background text-navy">
+        <div
+          className="px-4   mt-0 text-center"
+          style={{ paddingTop: "100px" }}
+        >
           <h1 className="display-2  pb-5  fw-semibold  ">CONTACT</h1>
           <h3 className="display-5  pb-5  fw-semibold gradient-text">
-            "Join our vibrant online language learning community and  connect <br/>with us."
+            "Join our vibrant online language learning community and connect{" "}
+            <br />
+            with us."
           </h3>
           <a href="#form">
             <svg
@@ -36,9 +49,7 @@ const Contact = () => {
               className="bi bi-arrow-down-circle-fill"
               viewBox="0 0 16 16"
             >
-              <path
-                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"
-              />
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z" />
             </svg>
           </a>
           <i className="bi bi-arrow-down-circle-fill"></i>

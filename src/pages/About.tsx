@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
 const getRandomGradient = () => {
@@ -55,8 +56,14 @@ const About = () => {
 
   return (
     <>
-      <div className="gradient-background text-navy" >
-        <div className="px-4   mt-0 text-center" style={{paddingTop:"100px"}}>
+      <Helmet>
+        <title>About</title>
+      </Helmet>
+      <div className="gradient-background text-navy">
+        <div
+          className="px-4   mt-0 text-center"
+          style={{ paddingTop: "100px" }}
+        >
           <h1 className="display-2  pb-5  fw-semibold  ">ABOUT</h1>
           <h3 className="display-5  pb-5  fw-semibold gradient-text">
             "We are an online community dedicated to making language learning
@@ -123,33 +130,39 @@ const About = () => {
                     const cardStyle = {
                       background: getRandomGradient(),
                       width: "100%",
-                      height:"205px",
+                      height: "205px",
                       borderRadius: "10px",
                       color: "white",
                     };
 
                     return (
                       <div className="col-md-12 px-5 py-3">
-                      <div className="card border-0" style={cardStyle}>
-                        <div className="d-flex flex-row justify-content-between"> {/* Added classes */}
-                          <img
-                            src={developer.profile}
-                            className="card-img-top img-fluid px-2 py-2" 
-                            alt={developer.name}
-                            style={{
-                              borderRadius: "10px",
-                              maxHeight: "200px",  // Adjust as needed
-                              width:"200px",
-                              objectFit: "cover", // Prevents distortion
-                            }}
-                          />
-                          <div className="card-body pt-5">
-                            <h5 className="card-title fw-bold fs-3">{developer.name}</h5>
-                            <p className="card-text ">{developer.title} | {developer.company}</p>
+                        <div className="card border-0" style={cardStyle}>
+                          <div className="d-flex flex-row justify-content-between">
+                            {" "}
+                            {/* Added classes */}
+                            <img
+                              src={developer.profile}
+                              className="card-img-top img-fluid px-2 py-2"
+                              alt={developer.name}
+                              style={{
+                                borderRadius: "10px",
+                                maxHeight: "200px", // Adjust as needed
+                                width: "200px",
+                                objectFit: "cover", // Prevents distortion
+                              }}
+                            />
+                            <div className="card-body pt-5">
+                              <h5 className="card-title fw-bold fs-3">
+                                {developer.name}
+                              </h5>
+                              <p className="card-text ">
+                                {developer.title} | {developer.company}
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>                    
                     );
                   })}
                 </div>

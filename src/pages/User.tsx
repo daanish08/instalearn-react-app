@@ -25,6 +25,7 @@ const User = () => {
   ];
 
   return (
+    
     <div className="bg-body-tertiary">
     <div className="container bg-body-tertiary">
       <h1 className="text-left fw-light pt-4 pb-4">

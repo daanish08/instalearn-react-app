@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { ICourse } from "../models/ICourse";
 import { useNavigate } from "react-router-dom";
 import CourseCard from "../components/courses/CourseCard";
+import { Helmet } from "react-helmet-async";
 
 const Courses = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -55,6 +56,9 @@ const Courses = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Courses</title>
+      </Helmet>
       <div className="container py-3 bg-body-tertiary">
         <div className="row ">
           <h1 className="pt-3 pb-2 gradient-text">
