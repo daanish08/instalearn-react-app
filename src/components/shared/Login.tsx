@@ -1,25 +1,30 @@
 import { useForm } from 'react-hook-form';
-import login from  "../../assets/image/login.jpg";
+import loginImg from  "../../assets/image/login.jpg";
 import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/authContext';
 
+interface ICredentials {
+  email: string;
+  password: string;
+}
 
-const LoginComponent = ({ userType }) => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+interface LoginComponentProps {
+  userType: string
+}
 
-  const onSubmit = (data) => {
+const LoginComponent = ({ userType }: LoginComponentProps) => {
+  const { register, handleSubmit, formState: { errors } } = useForm<ICredentials>();
+  const { login } = useAuth();
+
+  const onSubmit = (data: ICredentials) => {
     console.log(`${userType} Form Data:`, data);
-    // You can implement different login logic based on userType here
-    if (userType === 'admin') {
-      // Admin-specific logic
-    } else {
-      // User-specific logic
-    }
+    login(data);
   };
 
   return (
     <div className="login-page d-flex bg-body-tertiary" style={{ height: '580px' }}>
     <div className="col-md-6 login-image">
-      <img src={login} width={600} height={580}/>
+      <img src={loginImg} width={600} height={580}/>
     </div>
     <div className="col-md-6 d-flex py-5 justify-content-center">
     <div className="card w-75 py-5 px-3 "  >

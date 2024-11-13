@@ -16,17 +16,19 @@ import PendingEnrollments from "./components/admin/PendingEnrollments";
 import CourseForm from "./components/courses/CourseForm";
 import UserDashboard from "./components/user/DashBoard";
 import UserEnrolledCourses from "./components/user/UserEnrolledCourses";
+import { AuthProvider } from "./components/contexts/authContext";
 
 const App = () => {
   return (
     <BrowserRouter>
+    <AuthProvider>
       <main className="mt-5 pt-2 bg-body-tertiary">
         <Header />
         {/* Routing configuration */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/courses" element={<Courses />} />
-          <Route path="/add-course" element={<CourseForm />} />
+          <Route path="/admin/create-courses" element={<CourseForm />} />
           <Route path="/courses/:id" element={<CourseDetails />} />
           <Route path="/courses/update/:id" element={<CourseForm />} />
           <Route path="/about" element={<About />} />
@@ -58,6 +60,8 @@ const App = () => {
           <Route path="/user/enroll-courses" element={<UserEnrolledCourses />} />
         </Routes>
       </main>
+      
+    </AuthProvider>
       <Footer />
     </BrowserRouter>
   );
