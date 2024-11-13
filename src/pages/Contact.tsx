@@ -34,7 +34,7 @@ const Contact = () => {
           className="px-4   mt-0 text-center"
           style={{ paddingTop: "100px" }}
         >
-          <h1 className="display-2  pb-5  fw-semibold  ">CONTACT</h1>
+          <h1 className="text-navy fw-semibold">CONTACT</h1>
           <h3 className="display-5  pb-5  fw-semibold gradient-text">
             "Join our vibrant online language learning community and connect{" "}
             <br />
@@ -57,8 +57,8 @@ const Contact = () => {
       </div>
       <div className="container mt-5" id="form">
         <h2 className="text-left fw-light">
-          For any <span className="fw-semibold text-success">Media</span> and
-          <span className="fw-semibold text-success">Business</span> inquiries
+          For any <span className="text-navy fw-semibold">Media</span> and
+          <span className="text-navy fw-semibold">Business</span> inquiries
           <hr className="pb-2" />
         </h2>
         <p>
@@ -124,7 +124,8 @@ const Contact = () => {
             </select>
           </div>
           <br />
-          <button type="submit" className="btn btn-success">
+          <button className="bg-navy border-0 py-1 mb-3  rounded-pill text-white px-3"
+              style={{ backgroundColor: "#000B58" }}>
             Submit
           </button>
         </form>
