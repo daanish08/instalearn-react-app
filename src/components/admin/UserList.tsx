@@ -11,7 +11,6 @@ function UserEnrolledStatus() {
     const parsedUserId = parseInt(storedUserId || "0", 10); // Handle null or non-numeric strings
     setUserId(parsedUserId);
 
-    // Fetch enrollments only if userId is available
     if (userId) {
       fetchEnrollments(userId);
     }
