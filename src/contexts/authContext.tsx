@@ -76,7 +76,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     if (storedUser) {
       const userDetails = JSON.parse(storedUser);
       setUser(userDetails);
-      navigateBasedOnRole(userDetails.role);
     }
     setLoading(false);
   }, []);
