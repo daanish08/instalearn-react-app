@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -9,7 +9,9 @@ const UserList = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/instalearn/admin/users'); // Replace '/api/users' with your API endpoint
+        const response = await axios.get(
+          "http://localhost:8080/instalearn/admin/users"
+        ); // Replace '/api/users' with your API endpoint
         setUsers(response.data);
       } catch (error) {
         setError(error);
@@ -31,7 +33,10 @@ const UserList = () => {
 
   return (
     <div className="container py-3">
-      <h1 className='pt-3 pb-2 gradient-text'><span className='fw-light'>User</span> Details <hr className='text-navy'/></h1>
+      <h1 className="pt-3 pb-2 gradient-text">
+        <span className="fw-light">User</span> Details{" "}
+        <hr className="text-navy" />
+      </h1>
       <table className="table table-hover text-center">
         <thead>
           <tr>
@@ -39,7 +44,6 @@ const UserList = () => {
             <th>Name</th>
             <th>Email</th>
             <th>Contact No.</th>
-           
           </tr>
         </thead>
         <tbody>
@@ -49,7 +53,6 @@ const UserList = () => {
               <td>{user.userName}</td>
               <td>{user.email}</td>
               <td>{user.phone}</td>
-             
             </tr>
           ))}
         </tbody>
