@@ -52,7 +52,7 @@ const Courses = () => {
   const handleDelete = async (id: string) => {
     try {
       // Sending DELETE request to the API
-      await axios.delete(`http://localhost:8080/instalearn/api/v1/course/delete/${id}`);
+      await axios.delete(`http://localhost:8080/instalearn/admin/A1/C2/delete`);
       console.log(`Course with id: ${id} deleted successfully`);
   
       // Update the course list to remove the deleted course
