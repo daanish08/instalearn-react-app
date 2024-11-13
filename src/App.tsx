@@ -17,6 +17,7 @@ import CourseForm from "./components/courses/CourseForm";
 import UserDashboard from "./components/user/DashBoard";
 import UserEnrolledCourses from "./components/user/UserEnrolledCourses";
 import { AuthProvider } from "./contexts/authContext";
+import Feedback from "./pages/Feedback";
 
 const App = () => {
   return (
@@ -65,6 +66,8 @@ const App = () => {
               path="/user/enroll-courses"
               element={<UserEnrolledCourses />}
             />
+
+            <Route path="/admin/feedbacks/list" element={<Feedback />} />
           </Routes>
         </main>
       </AuthProvider>
