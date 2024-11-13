@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom"; // Assuming you're using react-router-dom
-import CourseCard from "../courses/CourseCard";
 import axios from "axios";
 
 function UserDashboard() {
@@ -58,7 +57,7 @@ function UserDashboard() {
     const fetchDashboardData = async () => {
       try {
         const enrolledCoursesResponse = await fetch(
-          `http://localhost:8080/instalearn/api/v1/${intId}/enroll/count`
+          `http://localhost:8080/instalearn/api/v1/4/enroll/count`
         );
         const availableCoursesResponse = await fetch(
           "http://localhost:8080/instalearn/api/v1/course/count"

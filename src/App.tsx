@@ -68,7 +68,7 @@ const App = () => {
               element={<UserEnrolledCourses />}
             />
 
-            <Route path="/admin/feedbacks/list" element={<Feedback />} />
+            <Route path="/admin/feedback-details" element={<Feedback />} />
           </Routes>
         </main>
       </AuthProvider>

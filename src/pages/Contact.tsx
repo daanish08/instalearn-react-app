@@ -58,7 +58,7 @@ const Contact = () => {
       <div className="container mt-5" id="form">
         <h2 className="text-left fw-light">
           For any <span className="text-navy fw-semibold">Media</span> and
-          <span className="text-navy fw-semibold">Business</span> inquiries
+          <span className="text-navy fw-semibold"> Business</span> inquiries
           <hr className="pb-2" />
         </h2>
         <p>

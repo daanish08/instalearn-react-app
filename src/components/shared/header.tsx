@@ -1,7 +1,16 @@
 import { Link } from "react-router-dom";
 import MenuList from "./menulist";
+import { useAuth } from "../../contexts/authContext";
 
 function Header() {
+
+
+  const { user } = useAuth();
+
+
+  const userRole = user?.role;
+  console.log(userRole);
+  
   return (
     <nav
       className="navbar navbar-expand-md  bg-navy fixed-top pt-3"
@@ -22,7 +31,7 @@ function Header() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarCollapse">
-          <MenuList></MenuList>
+          <MenuList userRole={userRole}/>
         </div>
       </div>
     </nav>

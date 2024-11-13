@@ -19,7 +19,7 @@ function UserEnrolledCourses() {
 
   const fetchEnrollments = async (userId: number) => {
     try {
-      const response = await fetch(`/api/enrollments/${userId}`); // Replace with your API endpoint
+      const response = await fetch(`http://localhost:8080/instalearn/api/v1/4/enroll/courses`); // Replace with your API endpoint
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
