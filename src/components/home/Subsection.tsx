@@ -33,6 +33,9 @@ const features = [
 ];
 
 const Subsection = () => {
+  const scrollToList = () => {
+    document.getElementById("list")?.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     <div className="">
       <div className="px-3 bg-light-blue">
@@ -57,7 +60,7 @@ const Subsection = () => {
             <br /> best online courses!
           </h1>
           <br />
-          <a href="#list" className="text-center">
+          <a href="#list" className="text-center" onClick={scrollToList}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width={30}
@@ -72,7 +75,7 @@ const Subsection = () => {
         </div>
       </div>
 
-      <div className="px-4">
+      <div className="px-4" id="list">
         <div className="px-4 pt-5  pb-4 mt-0 text-left fw-bold" id="home">
           <p className=" lead mb-1 text-white">Many Hours of Courses</p>
           <h2 className="display-4 text-white fw-semibold">
