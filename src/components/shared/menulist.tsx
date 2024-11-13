@@ -46,7 +46,9 @@ const MenuList = ({ userRole }) => {
 
   return (
     <ul className="navbar-nav justify-content-end mb-2 ms-auto gap-4 mb-md-0">
-      {userRole === "" || (userRole === null && renderMenu(generalMenus))}{" "}
+      {userRole === "" ||
+        userRole === null ||
+        (userRole === undefined && renderMenu(generalMenus))}{" "}
       {userRole === "USER" && renderMenu(userMenus)}{" "}
       {userRole === "ADMIN" && renderMenu(adminMenus)}{" "}
     </ul>
