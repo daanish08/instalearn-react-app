@@ -1,21 +1,27 @@
 import { useForm } from 'react-hook-form';
 import login from  "../../assets/image/login.jpg";
+import axios from 'axios';
+import { useAuth } from '../../contexts/authContext';
 
 const Signup= ({ userType }) => {
+  
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = (data) => {
+    const response =  axios.post(`http://localhost:8080/instalearn/admin/addAdmin`, data);
+    console.log('API Response:', response.data);
     console.log('Signup Form Data:', data);
-    // Handle signup logic here, e.g., API call
   };
 
   const contactNumberValidator = (value) => {
     return /^\d{10}$/.test(value) || 'Contact number must be exactly 10 digits.';
   };
 
-  const accessCodeValidator = (value) => {
-    return value === '1234' || 'Enter a valid Access Code';
-  };
+    const accessCodeValidator = (value) => {
+      return value === '1234' || 'Enter a valid Access Code';
+
+  }
+  
 
   return (
     <div className="d-flex bg-body-tertiary" style={{ height: '580px' }}>
@@ -90,7 +96,7 @@ const Signup= ({ userType }) => {
                 className="form-control"
                 id="refCode"
                 placeholder="Access Code"
-                {...register('refCode', { validate: accessCodeValidator })}
+                onChange={accessCodeValidator}
               />
               {errors.refCode && <div className="text-danger">{errors.refCode.message}</div>}
             </div>

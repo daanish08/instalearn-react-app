@@ -4,7 +4,7 @@ import { useAuth } from "../../contexts/authContext";
 
 interface IProfile {
   id: number;
-  userName: string;
+  name: string;
   email: string;
   phone: string;
   password: string;
@@ -52,22 +52,20 @@ function Profile() {
     setPasswordTouched(true);
   };
 
-  const editProfile = () => {
-    console.log("Edit Profile clicked");
-  };
+  
 
   return (
-    <div className="container-fluid d-flex justify-content-center align-items-center py-3">
-      <div className="card" style={{ width: "22rem" }}>
+    <div className="container-fluid d-flex justify-content-center align-items-center py-4">
+      <div className="card" style={{ width: "23rem" }}>
         <img
-          src="/assets/img/vectorIcons/profile.png"
+          src="../src/assets/image/profile.png"
           height="280px"
-          className="card-img-top pt-1"
+          className="card-img-top"
           alt="Profile Image"
         />
         <div className="card-body">
           <h5 className="card-title text-center fw-bold gradient-text">
-            {profile?.userName}
+            {profile?.name}
           </h5>
           <ul className="list-group list-group-flush text-center">
             <li className="list-group-item fw-light">
@@ -78,10 +76,8 @@ function Profile() {
               <strong className="text-muted fw-bold">Contact: </strong>
               {profile?.phone}
             </li>
-            <li>
-              <label htmlFor="password" className="pb-1">
-                Password
-              </label>
+            <li className="list-group-item fw-light">
+            <strong className="text-muted fw-bold">Password: </strong>
               <input
                 type="password"
                 value={password}

@@ -1,7 +1,4 @@
 import { NavLink } from "react-router-dom";
-// import { useAuth } from "../../contexts/authContext";
-
-// const { logout } = useAuth();
 
 const generalMenus = [
   { path: "/", label: "Home" },
@@ -17,7 +14,7 @@ const userMenus = [
   { path: "user/dashboard", label: "Dashboard" },
   { path: "/about", label: "About" },
   { path: "/contact", label: "Contact" },
-  { path: "/profile", label: "Profile" },
+  { path: "/user/profile", label: "Profile" },
   { path: "/", label: "Logout" },
 ];
 
@@ -25,12 +22,13 @@ const adminMenus = [
   { path: "/", label: "Home" },
   { path: "admin/dashboard", label: "Dashboard" },
   { path: "/admin/users", label: "Users" },
-  { path: "/profile", label: "Profile" },
+  { path: "/admin/profile", label: "Profile" },
   { path: "/", label: "Logout" },
 ];
 
 // const userRole="ADMIN"
 const MenuList = ({ userRole }) => {
+  console.log(userRole);
   const renderMenu = (menus) =>
     menus.map((item) => (
       <li key={item.path} className="nav-item">
@@ -46,9 +44,7 @@ const MenuList = ({ userRole }) => {
 
   return (
     <ul className="navbar-nav justify-content-end mb-2 ms-auto gap-4 mb-md-0">
-      {userRole === "" ||
-        userRole === null ||
-        (userRole === undefined && renderMenu(generalMenus))}{" "}
+      {(userRole === "" ||userRole === null || userRole === undefined && renderMenu(generalMenus))}{" "}
       {userRole === "USER" && renderMenu(userMenus)}{" "}
       {userRole === "ADMIN" && renderMenu(adminMenus)}{" "}
     </ul>

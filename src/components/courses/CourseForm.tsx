@@ -105,6 +105,20 @@ const CourseForm = () => {
                 </div>
                 {errors.instructor && <span className="text-danger">{errors.instructor.message}</span>}
             </div>
+
+            <div className="mb-3">
+                <label className="form-label fw-bold gradient-text">Description</label>
+                <div className="input-group">
+                    <span className="input-group-text"> <FaBook /> </span>
+                    <input
+                        className="form-control"
+                        {...register("description", { required: "Description is required." })}
+                        placeholder="Enter Description"
+                    />
+                </div>
+                {errors.description && <span className="text-danger">{errors.description.message}</span>}
+            </div>
+
             <div className="mb-3">
                 <label className="form-label fw-bold gradient-text">Duration (Hrs)</label>
                 <div className="input-group">
