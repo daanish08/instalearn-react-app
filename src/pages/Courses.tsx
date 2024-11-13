@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ICourse } from "../models/ICourse";
+import { useNavigate } from "react-router-dom";
 
 const getRandomGradient = () => {
   const gradients = [
@@ -25,7 +26,7 @@ const Employees = () => {
         const response = await axios.get(
           "http://localhost:8080/instalearn/api/v1/course/list"
         );
-        console.log(response);
+        console.log(response.data);
         setIsLoading(false);
         setCourseList(response.data);
       } catch (error) {
@@ -36,15 +37,32 @@ const Employees = () => {
     getEmployees();
   }, []);
 
+  const navigate = useNavigate();
+
+  const handleView = (id: string) => {
+    console.log(id);
+    navigate(`/courses/${id}`);
+  };
+  
   const handleUpdate = (id: number) => {
     // Implement update functionality here
     console.log(`Update course with id: ${id}`);
   };
 
-  const handleDelete = (id: number) => {
-    // Implement delete functionality here
-    console.log(`Delete course with id: ${id}`);
+  const handleDelete = async (id: string) => {
+    try {
+      // Sending DELETE request to the API
+      await axios.delete(`http://localhost:8080/instalearn/api/v1/course/delete/${id}`);
+      console.log(`Course with id: ${id} deleted successfully`);
+  
+      // Update the course list to remove the deleted course
+      setCourseList(courseList.filter(course => course.courseID !== id));
+    } catch (error) {
+      alert("Failed to delete the course. Please try again later.");
+      // setError("Failed to delete the course. Please try again later.");
+    }
   };
+  
 
   return (
     <>
@@ -105,7 +123,7 @@ const Employees = () => {
                     </p>
                     <hr />
                     <div className="d-flex justify-content-between">
-                      <button className="btn btn-success me-3">
+                      <button onClick={() => handleView(course.courseId)} className="btn btn-success me-3">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="16"
@@ -134,7 +152,7 @@ const Employees = () => {
                         </svg>
                       </button>
                       <button
-                        onClick={() => handleDelete(course.id)}
+                        onClick={() => handleDelete(course.courseID)}
                         className="btn btn-danger"
                       >
                         <svg
