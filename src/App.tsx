@@ -13,7 +13,7 @@ import UserList from "./components/admin/UserList";
 import Header from "./components/shared/header";
 import Footer from "./components/shared/footer";
 import PendingEnrollments from "./components/admin/PendingEnrollments";
-import UpdateCourse from "./components/courses/UpdateCourse";
+import CourseForm from "./components/courses/CourseForm";
 
 const App = () => {
   return (
@@ -24,8 +24,9 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/courses" element={<Courses />} />
+          <Route path="/add-course" element={<CourseForm />} />
           <Route path="/courses/:id" element={<CourseDetails />} />
-          <Route path="/courses/update/:id" element={<UpdateCourse />} />
+          <Route path="/courses/update/:id" element={<CourseForm />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route
