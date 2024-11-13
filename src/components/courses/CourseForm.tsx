@@ -28,6 +28,7 @@ const CourseForm = () => {
           );
           setCourse(response.data);
           reset(response.data); // Reset form with fetched data
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
           alert("Failed to fetch course details. Please try again later.");
         } finally {

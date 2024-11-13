@@ -18,6 +18,7 @@ import UserDashboard from "./components/user/DashBoard";
 import UserEnrolledCourses from "./components/user/UserEnrolledCourses";
 import { AuthProvider } from "./contexts/authContext";
 import Feedback from "./pages/Feedback";
+import AdminDashboard from "./components/admin/Dashboard";
 
 const App = () => {
   return (
@@ -57,7 +58,7 @@ const App = () => {
             />
 
             <Route path="/user/dashboard" element={<UserDashboard />} />
-            <Route path="/user/dashboard" element={<UserDashboard />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route
               path="/user/enroll-courses"
               element={<UserEnrolledCourses />}

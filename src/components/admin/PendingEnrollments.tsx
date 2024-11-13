@@ -24,7 +24,7 @@ const ApproveCourses: React.FC = () => {
       }
       const data: IEnrollment[] = await response.json();
       setEnrollments(data);
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error loading enrollments:", error);
     }
   };
@@ -45,7 +45,7 @@ const ApproveCourses: React.FC = () => {
 
     if (!user || updatedStatus === "Pending") return;
 
-    let updateUrl =
+    const updateUrl =
       updatedStatus === "Approved"
         ? `http://localhost:8080/instalearn/admin/A${user.id}/approvals/E${enrollment.enrollmentId}/approve`
         : `http://localhost:8080/instalearn/admin/A${user.id}/approvals/E${enrollment.enrollmentId}/reject`;
