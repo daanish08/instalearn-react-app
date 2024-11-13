@@ -15,7 +15,7 @@ import Footer from "./components/shared/footer";
 import PendingEnrollments from "./components/admin/PendingEnrollments";
 import CourseForm from "./components/courses/CourseForm";
 import UserDashboard from "./components/user/DashBoard";
-import UserEnrolledStatus from "./components/admin/UserList";
+import UserEnrolledCourses from "./components/user/UserEnrolledCourses";
 
 const App = () => {
   return (
@@ -37,7 +37,7 @@ const App = () => {
           />
 
           <Route
-            path="/admin/enrollmentlist"
+            path="/admin/approve-courses"
             element={<PendingEnrollments />}
           />
 
@@ -55,7 +55,7 @@ const App = () => {
 
           <Route path="/user/dashboard" element={<UserDashboard />} />
           <Route path="/user/dashboard" element={<UserDashboard />} />
-          <Route path="/user/enroll-courses" element={<UserEnrolledStatus />} />
+          <Route path="/user/enroll-courses" element={<UserEnrolledCourses />} />
         </Routes>
       </main>
       <Footer />
