@@ -53,7 +53,9 @@ const CourseForm = () => {
         reset();
       })
       .catch(() => {
-        alert(`Failed to ${id ? "update" : "add"} course. Please try again later.`);
+        alert(
+          `Failed to ${id ? "update" : "add"} course. Please try again later.`
+        );
       });
   };
 
@@ -68,16 +70,20 @@ const CourseForm = () => {
   }
 
   return (
-    <div className="container mt-5">
-      <div className="card mb-3">
+    <div className="pt-5 px-5 gradient-background">
+      <div className="card mb-3 px-2">
         <div className="card-body">
-          <h1 className="card-title">{id ? "Edit Course" : "Add New Course"}</h1>
+          <h1 className="card-title gradient-text">
+            {id ? "Edit Course" : "Add New Course"} <hr className="text-navy w-50" />
+          </h1>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-3">
-              <label className="form-label">Course Name</label>
+              <label className=" form-label fw-bold gradient-text">Course Name</label>
               <input
                 className="form-control"
-                {...register("courseName", { required: "Course name is required" })}
+                {...register("courseName", {
+                  required: "Course name is required",
+                })}
                 placeholder="Enter course name"
               />
               {errors.courseName && (
@@ -85,10 +91,12 @@ const CourseForm = () => {
               )}
             </div>
             <div className="mb-3">
-              <label className="form-label">Instructor</label>
+              <label className=" form-label fw-bold gradient-text ">Instructor</label>
               <input
                 className="form-control"
-                {...register("instructor", { required: "Instructor name is required" })}
+                {...register("instructor", {
+                  required: "Instructor name is required",
+                })}
                 placeholder="Enter instructor name"
               />
               {errors.instructor && (
@@ -96,14 +104,20 @@ const CourseForm = () => {
               )}
             </div>
             <div className="mb-3">
-              <label className="form-label">Duration (Hrs)</label>
+              <label className=" form-label fw-bold gradient-text ">Duration (Hrs)</label>
               <input
                 className="form-control"
                 type="number"
                 {...register("duration", {
                   required: "Duration is required",
-                  min: { value: 1, message: "Duration must be at least 1 hour" },
-                  max: { value: 100, message: "Duration can't exceed 100 hours" },
+                  min: {
+                    value: 1,
+                    message: "Duration must be at least 1 hour",
+                  },
+                  max: {
+                    value: 100,
+                    message: "Duration can't exceed 100 hours",
+                  },
                 })}
                 placeholder="Enter course duration"
               />
@@ -112,7 +126,7 @@ const CourseForm = () => {
               )}
             </div>
             <div className="mb-3">
-              <label className="form-label">Description</label>
+              <label className=" form-label fw-bold gradient-text ">Description</label>
               <textarea
                 className="form-control"
                 {...register("description", {
@@ -125,11 +139,13 @@ const CourseForm = () => {
                 placeholder="Enter course description"
               />
               {errors.description && (
-                <span className="text-danger">{errors.description.message}</span>
+                <span className="text-danger">
+                  {errors.description.message}
+                </span>
               )}
             </div>
             <div className="mb-3">
-              <label className="form-label">Course URL</label>
+              <label className=" form-label fw-bold gradient-text">Course URL</label>
               <input
                 className="form-control"
                 type="url"
@@ -146,7 +162,7 @@ const CourseForm = () => {
               )}
             </div>
             <div className="mb-3">
-              <label className="form-label">GitHub URL</label>
+              <label className=" form-label fw-bold gradient-text">GitHub URL</label>
               <input
                 className="form-control"
                 type="url"
@@ -163,7 +179,7 @@ const CourseForm = () => {
               )}
             </div>
             <div className="mb-3">
-              <label className="form-label">Drive URL</label>
+              <label className=" form-label fw-bold gradient-text">Drive URL</label>
               <input
                 className="form-control"
                 type="url"
@@ -179,8 +195,8 @@ const CourseForm = () => {
                 <span className="text-danger">{errors.driveURL.message}</span>
               )}
             </div>
-            <button type="submit" className="btn btn-primary">
-              {id ? "Save Changes" : "Add Course"}
+            <button type="submit" className="btn text-white fw-bold" style={{backgroundColor:'#1e1357'}}> 
+              {id ? "Update" : "Add Course"}
             </button>
           </form>
         </div>
