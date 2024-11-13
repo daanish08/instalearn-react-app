@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { IUserList } from "../../models/IUserList";
 
 const UserList = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<IUserList[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
+  const [error, setError] = useState<Error | null>(null);
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -13,8 +13,12 @@ const UserList = () => {
           "http://localhost:8080/instalearn/admin/users"
         ); // Replace '/api/users' with your API endpoint
         setUsers(response.data);
-      } catch (error) {
-        setError(error);
+      } catch (err) {
+        if (err instanceof Error) {
+          setError(err);
+        } else {
+          setError(new Error("An unexpected error occurred"));
+        }
       } finally {
         setLoading(false);
       }
@@ -48,7 +52,7 @@ const UserList = () => {
         </thead>
         <tbody>
           {users.map((user) => (
-            <tr key={user.id}>
+            <tr key={user.userId}>
               <td>{user.userId}</td>
               <td>{user.userName}</td>
               <td>{user.email}</td>
