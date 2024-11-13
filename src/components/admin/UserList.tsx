@@ -1,61 +1,104 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import { IEnrollment } from "../../models/IEnrollment";
 
-const UserList = () => {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+function UserEnrolledStatus() {
+  const [enrollments, setEnrollments] = useState([]);
+  const [userId, setUserId] = useState(0); // Initialize userId
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get('http://localhost:8080/instalearn/admin/users'); // Replace '/api/users' with your API endpoint
-        setUsers(response.data);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    // Simulate getting user ID (replace with actual authentication mechanism)
+    const storedUserId = localStorage.getItem("userId"); // Or from context, etc.
+    const parsedUserId = parseInt(storedUserId || "0", 10); // Handle null or non-numeric strings
+    setUserId(parsedUserId);
 
-    fetchUsers();
+    // Fetch enrollments only if userId is available
+    if (userId) {
+      fetchEnrollments(userId);
+    }
   }, []);
 
-  if (loading) {
-    return <div>Loading users...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
+  const fetchEnrollments = async (userId: number) => {
+    try {
+      const response = await fetch(`/api/enrollments/${userId}`); // Replace with your API endpoint
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      // Set default status to APPROVED if not provided by the API
+      const updatedEnrollments = data.map((enrollment: IEnrollment) => ({
+        ...enrollment,
+        status: enrollment.status || "APPROVED", // Default to APPROVED
+      }));
+      setEnrollments(updatedEnrollments);
+    } catch (error) {
+      console.error("Error fetching enrollments:", error);
+      // Handle error appropriately (e.g., display error message)
+    }
+  };
 
   return (
-    <div className="container py-3">
-      <h1 className='pt-3 pb-2 gradient-text'><span className='fw-light'>User</span> Details <hr className='text-navy'/></h1>
-      <table className="table table-hover text-center">
+    <div className="container-fluid mt-4 px-5">
+      <h2>
+        Enrolled <span className="fw-semibold text-success">Courses</span>
+        <hr />
+      </h2>
+
+      <table className="table table-bordered mt-3 table-hover">
         <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Contact No.</th>
-           
+          <tr style={{ color: "blue" }}>
+            <th>Enrollment ID</th>
+            <th>Course Title</th>
+            <th>Current Status</th>
+            <th>Action</th>
+            <th>Certificate</th>
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
-            <tr key={user.id}>
-              <td>{user.userId}</td>
-              <td>{user.userName}</td>
-              <td>{user.email}</td>
-              <td>{user.phone}</td>
-             
+          {enrollments.map((enrollment: IEnrollment) => (
+            <tr key={enrollment.enrollmentId}>
+              <td>{enrollment.enrollmentId}</td>
+              <td>{enrollment.course.courseName}</td>
+              <td>{enrollment.status}</td>
+              <td>
+                <button
+                  className={`btn fw-bold btn-${enrollment.status.toLowerCase()}`}
+                  style={{ width: "100px" }}
+                  onClick={() => {
+                    // Handle navigation or action based on status
+                    if (enrollment.status === "APPROVED") {
+                      // Navigate to course details
+                      window.location.href = `/courses/${enrollment.course.courseId}`; // Or use React Router
+                    }
+                  }}
+                  disabled={enrollment.status !== "APPROVED"}
+                >
+                  {enrollment.status === "APPROVED"
+                    ? "View"
+                    : enrollment.status}
+                </button>
+              </td>
+              <td>
+                <button
+                  className={`btn fw-semibold text-white bg-${enrollment.status.toLowerCase()}`}
+                  style={{ width: "100px" }}
+                  onClick={() => {
+                    // Handle certificate download or action
+                    if (enrollment.status === "APPROVED") {
+                      // Navigate to certificate download or display
+                      window.location.href = `/courses/${enrollment.course.courseId}/completed`; // Or use React Router
+                    }
+                  }}
+                  disabled={enrollment.status !== "APPROVED"}
+                >
+                  {enrollment.status === "APPROVED" ? "Download" : "Complete"}
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
   );
-};
+}
 
-export default UserList;
+export default UserEnrolledStatus;
