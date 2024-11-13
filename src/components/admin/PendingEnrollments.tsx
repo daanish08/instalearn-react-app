@@ -1,59 +1,94 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
-const PendingEnrollments = () => {
-  const [enrollments, setEnrollments] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+interface Enrollment {
+  id: number;
+  username: string;
+  courseTitle: string;
+  status: string;
+}
+
+const mockEnrollments: Enrollment[] = [
+  { id: 1, username: 'john_doe', courseTitle: 'React Basics', status: 'Pending' },
+  { id: 2, username: 'jane_smith', courseTitle: 'Advanced Angular', status: 'Approved' },
+  { id: 3, username: 'alice_jones', courseTitle: 'Vue Mastery', status: 'Rejected' },
+  // Add more mock data as needed
+];
+
+const ApproveCourses: React.FC = () => {
+  const [enrollments, setEnrollments] = useState<Enrollment[]>([]);
 
   useEffect(() => {
-    const fetchEnrollments = async () => {
-      try {
-        const response = await axios.get('http://localhost:8080/instalearn/api/v1/enrollments'); // Replace with your API endpoint
-        setEnrollments(response.data);
-        console.log(response.data)
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchEnrollments();
+    loadEnrollmentList();
   }, []);
 
-  if (loading) {
-    return <div>Loading pending enrollments...</div>;
-  }
+  const loadEnrollmentList = () => {
+    // Simulate fetching data from a service
+    setEnrollments(mockEnrollments);
+    console.log('Loaded enrollments:', mockEnrollments);
+  };
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-
-  if (enrollments.length === 0) {
-    return <div>No pending enrollments found.</div>;
-  }
+  const updateStatus = (updatedEnrollment: Enrollment) => {
+    // Logic to update enrollment status
+    console.log('Update Status:', updatedEnrollment);
+    setEnrollments((prevEnrollments) =>
+      prevEnrollments.map((enr) =>
+        enr.id === updatedEnrollment.id ? { ...enr, status: updatedEnrollment.status } : enr
+      )
+    );
+  };
 
   return (
-    <div className="container">
-      <table className="table table-hover">
-        <thead>
+    <div className="container-fluid mt-4 px-5">
+      <h2 className="text-left fw-light">
+        Approve <span className="fw-semibold text-success">Enrollment Status</span>
+        <hr />
+      </h2>
+
+      <table className="table table-bordered mt-4 table-hover">
+        <thead className="table-success" style={{ color: 'blue' }}>
           <tr>
             <th>Enrollment ID</th>
-            <th>User</th>
-            <th>Course</th>
+            <th>Username</th>
+            <th>Course Title</th>
+            <th>Current Status</th>
             <th>Status</th>
-            {/* Add other columns as needed */}
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
           {enrollments.map((enrollment) => (
             <tr key={enrollment.id}>
               <td>{enrollment.id}</td>
-              <td>{enrollment.user.name || 'N/A'}</td> {/*  Handle potential missing user data */}
-              <td>{enrollment.course.name || 'N/A'}</td> {/* Handle potential missing course data */}
+              <td>{enrollment.username}</td>
+              <td>{enrollment.courseTitle}</td>
               <td>{enrollment.status}</td>
-              {/* Add other data cells as needed */}
+              <td>
+                <select
+                  className="form-select"
+                  value={enrollment.status}
+                  onChange={(e) =>
+                    setEnrollments((prevEnrollments) =>
+                      prevEnrollments.map((enr) =>
+                        enr.id === enrollment.id
+                          ? { ...enr, status: e.target.value }
+                          : enr
+                      )
+                    )
+                  }
+                >
+                  <option value="Pending">Pending</option>
+                  <option value="Approved">Approved</option>
+                  <option value="Rejected">Rejected</option>
+                </select>
+              </td>
+              <td>
+                <button
+                  className="btn btn-success"
+                  onClick={() => updateStatus(enrollment)}
+                >
+                  Update
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -62,4 +97,4 @@ const PendingEnrollments = () => {
   );
 };
 
-export default PendingEnrollments;
+export default ApproveCourses;
