@@ -1,6 +1,5 @@
-
 .gradient-background {
-  background: linear-gradient(to bottom, #1e1357,white); 
+  background: linear-gradient(to bottom, #1e1357, white);
 }
 
 .gradient-text {
@@ -11,18 +10,22 @@
   color: transparent;
 }
 
-.bg-menu-btn{
+.bg-menu-btn {
   background-color: #bbb8cc;
 }
 
-
-.text-navy{
-  color:#1e1357;
+.text-navy {
+  color: #1e1357;
 }
 
-.bg-btn{
-  background-color:#1e1357;
+.bg-btn {
+  background-color: #1e1357;
 }
-.bg-navy{
-  background-color:#1e1357;
+.bg-navy {
+  background-color: #1e1357;
+}
+
+.custom-card:hover {
+  transform: scale(1.05);
+  
 }
