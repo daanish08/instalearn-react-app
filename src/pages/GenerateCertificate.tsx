@@ -3,6 +3,7 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { useAuth } from "../contexts/authContext";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 // Placeholder for your services – replace with your actual API calls
 
@@ -28,7 +29,10 @@ const courseService = {
   },
 };
 
-const GenerateCertificate = ({ courseId }) => {
+const GenerateCertificate = () => {
+  const { id } = useParams();
+  const courseId = id;
+
   const { user } = useAuth();
   const userId = user?.id;
   const [userName, setUserName] = useState("");
@@ -48,6 +52,7 @@ const GenerateCertificate = ({ courseId }) => {
     const fetchCourseDetails = async () => {
       if (courseId) {
         const name = await courseService.getcourseDetailsById(courseId);
+        console.log(name);
         setCourseName(name);
       }
     };
@@ -102,20 +107,20 @@ const GenerateCertificate = ({ courseId }) => {
             <br />
             <div
               className="certificate-footer d-flex text-center pt-6"
-              style={{ paddingLeft: "370px" }}
+              style={{ paddingLeft: "0px" }}
             >
-              <div className="footer-item px-4">
+              <div className="footer-item px-4 w-50">
                 <p>
-                  <span className="underline">
+                  <span className="underline  fw-bold">
                     {completionDate.toLocaleDateString("de-DE")}
                   </span>
                 </p>
                 <hr />
                 <p className="text-muted">Date</p>
               </div>
-              <div className="footer-item">
+              <div className="footer-item w-50">
                 <p>
-                  <span className="underline">{signature}</span>
+                  <span className="underline   fw-bold">{signature}</span>
                 </p>
                 <hr />
                 <p className="text-muted">Signature</p>
@@ -126,7 +131,7 @@ const GenerateCertificate = ({ courseId }) => {
       </div>
       <div className="text-center py-2">
         <button
-          className="bg-navy border-0 py-1 mb-3  rounded-pill text-white px-3"
+          className="bg-navy border-0 mb-3  rounded-pill text-white px-3"
           style={{ backgroundColor: "#000B58" }}
           onClick={generateCertificate}
         >

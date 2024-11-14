@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { IEnrollment } from "../../models/IEnrollment";
 import { useAuth } from "../../contexts/authContext";
+import { useNavigate } from "react-router-dom";
 
 function UserEnrolledCourses() {
+
+  const navigate = useNavigate();
   const [enrollments, setEnrollments] = useState([]);
   const { user } = useAuth();
   const userId = user?.id;
@@ -59,7 +62,7 @@ function UserEnrolledCourses() {
               <td>{enrollment.status}</td>
               <td>
                 <button
-                  className={`btn fw-bold btn-${enrollment.status.toLowerCase()}`}
+                  className={`btn fw-bold btn-success`}
                   style={{ width: "100px" }}
                   onClick={() => {
                     // Handle navigation or action based on status
@@ -77,18 +80,16 @@ function UserEnrolledCourses() {
               </td>
               <td>
                 <button
-                  className={`btn fw-semibold text-white bg-${enrollment.status.toLowerCase()}`}
+                  className={`btn fw-semibold btn-dark bg-${enrollment.status.toLowerCase()}`}
                   style={{ width: "100px" }}
                   onClick={() => {
-                    // Handle certificate download or action
                     if (enrollment.status === "APPROVED") {
-                      // Navigate to certificate download or display
-                      window.location.href = `/courses/${enrollment.course.courseId}/completed`; // Or use React Router
+                      navigate(`/course/${enrollment.course.courseId}/success`); // Or use React Router
                     }
                   }}
                   disabled={enrollment.status !== "APPROVED"}
                 >
-                  {enrollment.status === "APPROVED" ? "Download" : "Complete"}
+                  {enrollment.status === "APPROVED" ? "Download" : "Waiting"}
                 </button>
               </td>
             </tr>

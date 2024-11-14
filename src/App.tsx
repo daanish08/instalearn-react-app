@@ -47,12 +47,14 @@ const App = () => {
               element={<PendingEnrollments />}
             />
 
+            
+
             <Route path="/admin/users" element={<UserList />} />
             <Route path="/admin/signup" element={<Signup userType="admin" />} />
             <Route path="/user/signup" element={<Signup userType="user" />} />
             <Route
               path="/course/:id/success"
-              element={<GenerateCertificate userId="1" courseId="1" />}
+              element={<GenerateCertificate />}
             />
             <Route
               path="/user/login"
