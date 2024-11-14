@@ -4,6 +4,7 @@ import payPerPerson from "../../assets/image/payPerPerson.png";
 import price from "../../assets/image/price.png";
 import tutorial from "../../assets/image/tt1.png";
 import certificate from "../../assets/image/certify.png";
+import { useNavigate } from "react-router-dom";
 
 const features = [
   {
@@ -33,6 +34,7 @@ const features = [
 ];
 
 const Subsection = () => {
+  const navigate = useNavigate();
   const scrollToList = () => {
     document.getElementById("list")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -89,6 +91,7 @@ const Subsection = () => {
           <button
             className="bg-navy border-0 py-1 mb-3  rounded-pill text-white px-3"
             style={{ backgroundColor: "#000B58" }}
+            onClick={() => navigate("/courses")}
           >
             View All Courses
           </button>
@@ -197,6 +200,7 @@ const Subsection = () => {
             <button
               className="bg-navy border-0 py-1 mb-3  rounded-pill text-white px-3"
               style={{ backgroundColor: "#000B58" }}
+              onClick={() => navigate("/user/signup")}
             >
               CREATE ACCOUNT
             </button>
