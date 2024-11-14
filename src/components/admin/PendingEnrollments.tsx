@@ -5,19 +5,23 @@ import { useAuth } from "../../contexts/authContext";
 
 const ApproveCourses: React.FC = () => {
   const { user } = useAuth();
+  const userId = user?.id;
   const [enrollments, setEnrollments] = useState<IEnrollment[]>([]);
   const [selectedStatus, setSelectedStatus] = useState<{
     [key: number]: string;
   }>({});
 
   useEffect(() => {
-    loadEnrollmentList();
-  }, []);
+    if (userId !== null) {
+
+      loadEnrollmentList();
+    }
+  }, [userId]);
 
   const loadEnrollmentList = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8080/instalearn/admin/A1/approvals"
+        `http://localhost:8080/instalearn/admin/A${userId}/approvals`
       );
       if (!response.ok) {
         throw new Error(`Error fetching enrollments: ${response.statusText}`);

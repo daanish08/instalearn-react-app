@@ -6,9 +6,8 @@ import { useAuth } from "../../contexts/authContext";
 function AdminDashboard() {
   const [userName, setUserName] = useState("");
 
-  const {user} =useAuth();
-  const userId=user?.id;
-  
+  const { user } = useAuth();
+  const userId = user?.id;
 
   const [adminDashBoardData, setAdminDashBoardData] = useState([
     {
@@ -37,10 +36,8 @@ function AdminDashboard() {
     },
   ]);
 
- 
   useEffect(() => {
-   
-       const fetchUserName = async () => {
+    const fetchUserName = async () => {
       if (userId) {
         try {
           const response = await fetch(
@@ -50,9 +47,8 @@ function AdminDashboard() {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
           const data = await response.json();
-        
+
           setUserName(data.name);
-         
         } catch (error) {
           console.error("Error fetching username:", error);
         }
@@ -71,7 +67,7 @@ function AdminDashboard() {
           "http://localhost:8080/instalearn/api/v1/course/count"
         );
         const availableCoursesResponse = await fetch(
-          "http://localhost:8080/instalearn/api/v1/course/count"
+          `http://localhost:8080/instalearn/admin/A${userId}/approvals`
         );
 
         if (!userCountResponse.ok || !availableCoursesResponse.ok) {
@@ -87,7 +83,7 @@ function AdminDashboard() {
           { ...adminDashBoardData[0], count: usersCount },
           { ...adminDashBoardData[1], count: feedbackCount },
           { ...adminDashBoardData[2], count: courseCount },
-          { ...adminDashBoardData[3], count: pendingApprovalCount },
+          { ...adminDashBoardData[3], count: pendingApprovalCount.length },
         ]);
       } catch (error) {
         console.error("Error fetching dashboard data:", error);
@@ -223,7 +219,7 @@ function AdminDashboard() {
               </h3>
               <p className="fs-5 fw-light">
                 <i>
-                Quickly refresh your course content
+                  Quickly refresh your course content
                   <br />
                   <br />
                   <Link

@@ -20,6 +20,7 @@ import { AuthProvider } from "./contexts/authContext";
 import Feedback from "./pages/Feedback";
 import AdminDashboard from "./components/admin/Dashboard";
 import Profile from "./components/shared/Profile";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   return (
@@ -64,16 +65,24 @@ const App = () => {
               path="/user/enroll-courses"
               element={<UserEnrolledCourses />}
             />
-            <Route
-              path="/user/enroll-courses"
-              element={<UserEnrolledCourses />}
-            />
 
             <Route path="/admin/feedback-details" element={<Feedback />} />
 
             <Route path="/admin/profile" element={<Profile />} />
             <Route path="/user/profile" element={<Profile />} />
           </Routes>
+          <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
         </main>
       </AuthProvider>
       <Footer />

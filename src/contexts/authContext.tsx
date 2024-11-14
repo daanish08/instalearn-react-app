@@ -8,6 +8,7 @@ import React, {
 } from "react";
 import { jwtDecode, JwtPayload } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface User {
   id: number;
@@ -41,6 +42,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const navigateBasedOnRole = (role: string) => {
     if (role === "USER") navigate("/user/dashboard");
     else if (role === "ADMIN") navigate("/admin/dashboard");
+
+    toast("Login successful!");
   };
 
   const login = async (credentials: {
@@ -93,5 +96,11 @@ const handleLoginApi = async (credentials: {
   email: string;
   password: string;
 }): Promise<{ data: { jwt: string } }> => {
-  return axios.post("http://localhost:8080/instalearn/auth/login", credentials);
+  return axios
+    .post("http://localhost:8080/instalearn/auth/login", credentials)
+    .then((res) => res)
+    .catch((err) => {
+      toast("Login failed", { autoClose: 2000 });
+      return err;
+    });
 };

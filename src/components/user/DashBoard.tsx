@@ -61,7 +61,7 @@ function UserDashboard() {
     const fetchDashboardData = async () => {
       try {
         const enrolledCoursesResponse = await fetch(
-          `http://localhost:8080/instalearn/api/v1/4/enroll/count`
+          `http://localhost:8080/instalearn/api/v1/${userId}/enroll/count`
         );
         const availableCoursesResponse = await fetch(
           "http://localhost:8080/instalearn/api/v1/course/count"

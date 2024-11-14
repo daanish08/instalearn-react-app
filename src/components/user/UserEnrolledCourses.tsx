@@ -1,25 +1,24 @@
 import { useState, useEffect } from "react";
 import { IEnrollment } from "../../models/IEnrollment";
+import { useAuth } from "../../contexts/authContext";
 
 function UserEnrolledCourses() {
   const [enrollments, setEnrollments] = useState([]);
-  const [userId, setUserId] = useState(0); // Initialize userId
+  const { user } = useAuth();
+  const userId = user?.id;
 
   useEffect(() => {
-    // Simulate getting user ID (replace with actual authentication mechanism)
-    const storedUserId = localStorage.getItem("userId"); // Or from context, etc.
-    const parsedUserId = parseInt(storedUserId || "0", 10); // Handle null or non-numeric strings
-    setUserId(parsedUserId);
-
-    // Fetch enrollments only if userId is available
+    console.log(userId);
     if (userId) {
       fetchEnrollments(userId);
     }
-  }, []);
+  }, [user]);
 
   const fetchEnrollments = async (userId: number) => {
     try {
-      const response = await fetch(`http://localhost:8080/instalearn/api/v1/4/enroll/courses`); // Replace with your API endpoint
+      const response = await fetch(
+        `http://localhost:8080/instalearn/api/v1/${userId}/enroll/courses`
+      );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -32,7 +31,6 @@ function UserEnrolledCourses() {
       setEnrollments(updatedEnrollments);
     } catch (error) {
       console.error("Error fetching enrollments:", error);
-      // Handle error appropriately (e.g., display error message)
     }
   };
 

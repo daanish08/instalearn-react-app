@@ -29,7 +29,7 @@ const LoginComponent = ({ userType }: LoginComponentProps) => {
     try {
       await login(data);
       setTimeout(() => {
-        toast.success("Login successful!", { autoClose: 2000 });
+        
       }, 200); // 200ms delay
     } catch (error) {
       setTimeout(() => {
