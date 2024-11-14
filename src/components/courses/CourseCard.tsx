@@ -129,7 +129,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
             {course.instructor || "Tharun"} | {course.duration || "18"} Hrs
           </p>
           <hr />
-          <div className="d-flex ps-5">
+          <div className="d-flex ps-3">
             {role === "ADMIN" && (
               <>
                 <button
@@ -159,7 +159,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
                 className="btn btn-warning px-4 mx-4"
                 disabled={enrolled}
               >
-                {enrolled ? "ENROLLED" : "ENROLLING"}
+                {enrolled ? "ENROLLED" : "ENROLL"}
               </button>
             )}
             {role === "USER" && (

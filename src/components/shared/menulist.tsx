@@ -51,7 +51,7 @@ const MenuList = ({ userRole, onLogout }: MenuListProps) => {
     ));
 
   return (
-    <ul className="navbar-nav justify-content-end mb-2 ms-auto gap-4 mb-md-0">
+    <ul className="navbar-nav justify-content-end mb-2 ms-auto gap-2 mb-md-0">
       {userRole === "" ||
         userRole === null ||
         (userRole === undefined && renderMenu(generalMenus))}{" "}
