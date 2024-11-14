@@ -89,8 +89,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
   };
 
   return (
-    <div className="col-md-4" style={{ minHeight: "400px", overflowY: "auto" }}>
-      <div className="card border border-0" style={cardStyle}>
+    <div className="col-md-4 custom-card" style={{ minHeight: "400px", overflowY: "auto" }}>
+      <div className="card border border-0 " style={cardStyle}>
         <img
           src={getRandomLogo()}
           className="card-img-top img-fluid"
