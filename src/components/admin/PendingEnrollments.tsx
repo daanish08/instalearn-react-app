@@ -12,8 +12,9 @@ const ApproveCourses: React.FC = () => {
   }>({});
 
   useEffect(() => {
-    if (userId !== null) {
-
+    console.log(user);
+    
+    if (userId) {
       loadEnrollmentList();
     }
   }, [userId]);
