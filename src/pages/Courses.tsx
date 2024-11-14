@@ -4,11 +4,18 @@ import { ICourse } from "../models/ICourse";
 import { useNavigate } from "react-router-dom";
 import CourseCard from "../components/courses/CourseCard";
 import { Helmet } from "react-helmet-async";
+import { useAuth } from "../contexts/authContext";
 
 const Courses = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [courseList, setCourseList] = useState<ICourse[]>([]);
   const [error, setError] = useState<string | null>(null);
+
+
+  const { user} = useAuth();
+  const role=user?.role;
+  console.log(role);
+  
 
   useEffect(() => {
     async function getCourses() {
@@ -16,7 +23,6 @@ const Courses = () => {
         const response = await axios.get(
           "http://localhost:8080/instalearn/api/v1/course/list"
         );
-        console.log(response.data);
         setIsLoading(false);
         setCourseList(response.data);
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -85,11 +91,12 @@ const Courses = () => {
             courseList.map((course: ICourse) => {
               return (
                 <CourseCard
-                  key={course.courseId} // Use course.id as the key
+                  key={course.courseId} 
                   course={course}
-                  handleView={handleView} // Pass the function, not the result
-                  handleUpdate={handleUpdate} // Pass the function
-                  handleDelete={handleDelete} // Pass the function
+                  handleView={handleView} 
+                  handleUpdate={handleUpdate} 
+                  handleDelete={handleDelete} 
+                  role={role}
                 />
               );
             })}
