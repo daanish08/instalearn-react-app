@@ -152,9 +152,6 @@ function UserDashboard() {
                   <br />A cycle of learning, applying, revising, and improving.
                   <br />
                   <br />
-                  <button className="btn btn-light fw-semibold">
-                    View Courses
-                  </button>
                 </i>
               </p>
             </div>
