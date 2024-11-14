@@ -95,10 +95,10 @@ function UserDashboard() {
   }, [userId]);
 
   return (
-    <div className="ps-5 pe-5 py-4 bg-body-tertiary">
+    <div className="ps-5 pe-5 py-5 bg-body-tertiary">
       <div className="mt-2">
         <div className="row">
-          <div className="col-md-6 d-flex px-2">
+          <div className="col-md-6 d-flex px-2 pb-3">
             {userDashBoardData.map((data) => (
               <div key={data.id} className="col-md-12 px-1">
                 <div

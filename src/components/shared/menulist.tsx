@@ -21,7 +21,7 @@ const generalMenus = [
 
 const userMenus = [
   { path: "/", label: "Home" },
-  { path: "user/dashboard", label: "Dashboard" },
+  { path: "/user/dashboard", label: "Dashboard" },
   { path: "/about", label: "About" },
   { path: "/contact", label: "Contact" },
   { path: "/user/profile", label: "Profile" },
@@ -29,19 +29,23 @@ const userMenus = [
 
 const adminMenus = [
   { path: "/", label: "Home" },
-  { path: "admin/dashboard", label: "Dashboard" },
+  { path: "/admin/dashboard", label: "Dashboard" },
   { path: "/admin/users", label: "Users" },
   { path: "/admin/profile", label: "Profile" },
 ];
 
-// const userRole="ADMIN"
 const MenuList = ({ userRole, onLogout }: MenuListProps) => {
-  console.log(userRole);
+  const isActive = (path: string) => {
+    return location.pathname === path
+      ? "nav-link active fw-bolder text-info rounded-pill"
+      : "nav-link fw-light text-white";
+  };
+
   const renderMenu = (menus: IMenu[]) =>
     menus.map((item: IMenu) => (
       <li key={item.path} className="nav-item">
         <NavLink
-          className="nav-link text-white"
+          className={isActive(item.path)}
           aria-current="page"
           to={item.path}
         >
@@ -52,12 +56,11 @@ const MenuList = ({ userRole, onLogout }: MenuListProps) => {
 
   return (
     <ul className="navbar-nav justify-content-end mb-2 ms-auto gap-2 mb-md-0">
-      {userRole === "" ||
-        userRole === null ||
-        (userRole === undefined && renderMenu(generalMenus))}{" "}
-      {userRole === "USER" && renderMenu(userMenus)}{" "}
-      {userRole === "ADMIN" && renderMenu(adminMenus)}{" "}
-      {!!userRole ? (
+      {(userRole === "" || userRole === null || userRole === undefined) &&
+        renderMenu(generalMenus)}
+      {userRole === "USER" && renderMenu(userMenus)}
+      {userRole === "ADMIN" && renderMenu(adminMenus)}
+      {userRole ? (
         <button className="btn text-white" onClick={onLogout}>
           Logout
         </button>

@@ -32,11 +32,10 @@ function Profile() {
       } else if (role === "USER") {
         endpoint = `http://localhost:8080/instalearn/user/userList/${id}`;
       }
-      // Add more conditions if you have more roles
-
+    
       const response = await axios.get(endpoint);
       setProfile(response.data);
-      // setPassword(response.data.password); // Initialize password state
+   
       console.log(response.data);
     } catch (error) {
       console.error("Error fetching profile:", error);
@@ -44,7 +43,7 @@ function Profile() {
   };
 
   return (
-    <div className="container-fluid d-flex justify-content-center align-items-center py-4">
+    <div className="container-fluid d-flex justify-content-center align-items-center py-5">
       <div className="card" style={{ width: "23rem" }}>
         <img
           src="../src/assets/image/profile.png"
