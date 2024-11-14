@@ -1,36 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+import React, { useState, useEffect } from "react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+import { useAuth } from "../contexts/authContext";
+import axios from "axios";
 
 // Placeholder for your services – replace with your actual API calls
+
 const userService = {
   getUserName: async (userId) => {
-    // Replace with your actual API call
-    const response = await fetch(`http://localhost:8080/instalearn/user/userList/${userId}`);
+    const response = await fetch(
+      `http://localhost:8080/instalearn/user/userList/${userId}`
+    );
     const data = await response.json();
-    console.log(data);
     return data.userName;
   },
 };
 
 const courseService = {
   getcourseDetailsById: async (courseId) => {
-    // Replace with your actual API call
-    const response = await fetch(`http://localhost:8080/instalearn/api/v1/course/${courseId}`);
-    const data = await response.json();
-    console.log(data+"   course");
-    
+    const response = await axios.get(
+      `http://localhost:8080/instalearn/api/v1/course/${courseId}`
+    );
+    const data = response.data;
+    console.log(data + "   course");
+
     return data.courseName;
   },
 };
 
-
-const GenerateCertificate = ({ userId, courseId }) => {
-  const [userName, setUserName] = useState('');
-  const [courseName, setCourseName] = useState('');
+const GenerateCertificate = ({ courseId }) => {
+  const { user } = useAuth();
+  const userId = user?.id;
+  const [userName, setUserName] = useState("");
+  const [courseName, setCourseName] = useState("");
   const [loading, setLoading] = useState(true);
   const completionDate = new Date();
-  const signature = 'FORD';
+  const signature = "FORD";
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -53,16 +58,16 @@ const GenerateCertificate = ({ userId, courseId }) => {
   }, [userId, courseId]);
 
   const generateCertificate = async () => {
-    const certificateElement = document.getElementById('certificate');
+    const certificateElement = document.getElementById("certificate");
     if (certificateElement) {
       try {
         const canvas = await html2canvas(certificateElement);
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jsPDF('landscape', 'px', 'a4');
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF("landscape", "px", "a4");
         const imgProps = pdf.getImageProperties(imgData);
         const pdfWidth = pdf.internal.pageSize.getWidth();
         const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
         pdf.save(`${userName}_Certificate.pdf`);
       } catch (error) {
         console.error("Error generating certificate:", error);
@@ -78,7 +83,6 @@ const GenerateCertificate = ({ userId, courseId }) => {
   return (
     <div className="container mt-2 ">
       <div id="certificate" className="certificate bg-tertiary py-4">
-      
         <div className="certificate-border p-5 text-center">
           <div className="p-4 border border-black">
             <img
@@ -87,19 +91,23 @@ const GenerateCertificate = ({ userId, courseId }) => {
               width={150}
               height={50}
             />
-            <h1 className='pb-4'>
+            <h1 className="pb-4">
               <span className="text-navy ">Certificate</span> of Completion
             </h1>
             <p>This is to certify that</p>
-            <h2 className='pt-2 pb-3 text-navy'>{userName}</h2>
+            <h2 className="pt-2 pb-3 text-navy">{userName}</h2>
             <p>has successfully completed the course</p>
             <h4>{courseName}</h4>
-            <br/><br/>
-            <div className="certificate-footer d-flex text-center pt-5" style={{paddingLeft:"300px"}}>
+            <br />
+            <br />
+            <div
+              className="certificate-footer d-flex text-center pt-6"
+              style={{ paddingLeft: "370px" }}
+            >
               <div className="footer-item px-4">
                 <p>
                   <span className="underline">
-                    {completionDate.toLocaleDateString('de-DE')}
+                    {completionDate.toLocaleDateString("de-DE")}
                   </span>
                 </p>
                 <hr />
@@ -116,8 +124,12 @@ const GenerateCertificate = ({ userId, courseId }) => {
           </div>
         </div>
       </div>
-      <div className="text-center py-3">
-        <button className="btn btn-success fw-light text-white" onClick={generateCertificate}>
+      <div className="text-center py-2">
+        <button
+          className="bg-navy border-0 py-1 mb-3  rounded-pill text-white px-3"
+          style={{ backgroundColor: "#000B58" }}
+          onClick={generateCertificate}
+        >
           Download Certificate
         </button>
       </div>

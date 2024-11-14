@@ -13,8 +13,8 @@ interface IProfile {
 function Profile() {
   const { user } = useAuth();
   const [profile, setProfile] = useState<IProfile | null>(null);
-  const [password, setPassword] = useState<string>("");
-  const [passwordTouched, setPasswordTouched] = useState<boolean>(false);
+  // const [password, setPassword] = useState<string>("");
+  // const [passwordTouched, setPasswordTouched] = useState<boolean>(false);
 
   useEffect(() => {
     if (user && user.role) {
@@ -37,22 +37,12 @@ function Profile() {
 
       const response = await axios.get(endpoint);
       setProfile(response.data);
-      setPassword(response.data.password); // Initialize password state
+      // setPassword(response.data.password); // Initialize password state
       console.log(response.data);
     } catch (error) {
       console.error("Error fetching profile:", error);
     }
   };
-
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  };
-
-  const handlePasswordBlur = () => {
-    setPasswordTouched(true);
-  };
-
-  
 
   return (
     <div className="container-fluid d-flex justify-content-center align-items-center py-4">
@@ -76,23 +66,6 @@ function Profile() {
               <strong className="text-muted fw-bold">Contact: </strong>
               {profile?.phone}
             </li>
-            <li className="list-group-item fw-light">
-            <strong className="text-muted fw-bold">Password: </strong>
-              <input
-                type="password"
-                value={password}
-                onChange={handlePasswordChange}
-                onBlur={handlePasswordBlur}
-                className="form-control"
-                id="password"
-                placeholder="Password"
-                required
-              />
-              {passwordTouched && password === "" && (
-                <div className="text-danger">Password is required.</div>
-              )}
-            </li>
-            {/* Password is NOT displayed for security reasons */}
           </ul>
         </div>
       </div>

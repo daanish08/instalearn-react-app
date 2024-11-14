@@ -32,6 +32,11 @@ const CourseDetails = () => {
     window.open(url, "_blank");
   };
 
+  const handleFinish = () => {
+    // Navigate to the generatecertificate component
+    navigate(`/course/${id}/success`);
+  };
+
   if (isLoading) {
     return (
       <div className="text-center">
@@ -98,6 +103,12 @@ const CourseDetails = () => {
                   Video
                 </button>
               )}
+
+              <div className="ms-auto">
+                <button onClick={handleFinish} className="btn btn-success">
+                  Finish
+                </button>
+              </div>
             </div>
           </div>
         </div>
