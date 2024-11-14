@@ -62,16 +62,9 @@ const CourseCard: React.FC<CourseCardProps> = ({
   const id = user?.id;
 
   const navigate = useNavigate();
-<<<<<<< Updated upstream
 
   const handleEnroll = async (courseId: number) => {
 
-=======
-  const [enrolled, setEnrolled] = useState(false);
-  const [enrollmentCount, setEnrollmentCount] = useState(0);
-
-  const handleEnroll = async (courseId: number) => {
->>>>>>> Stashed changes
     try {
       const response = await axios.post(
         `http://localhost:8080/instalearn/api/v1/U${id}/C${courseId}/enroll`
