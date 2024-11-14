@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom"; // Assuming you're using react-router-dom
 import axios from "axios";
+import { useAuth } from "../../contexts/authContext";
 
 function UserDashboard() {
   const [userName, setUserName] = useState("");
+
+  const { user } = useAuth();
+  const userId = user?.id;
   const [userDashBoardData, setUserDashBoardData] = useState([
     {
       id: 1,
@@ -34,19 +38,19 @@ function UserDashboard() {
   const [featuredCourses, setFeaturedCourses] = useState<ICourse[]>([]);
 
   useEffect(() => {
-    const userId = localStorage.getItem("userId"); // Assuming userId is stored in localStorage. Adjust as needed.
-    const intId = userId ? parseInt(userId, 10) : null; // Parse to integer
-
     const fetchUserName = async () => {
-      if (intId) {
+      if (userId) {
         try {
           const response = await fetch(
-            `http://localhost:8080/instalearn/user/userList/${intId}` // Adjust API endpoint if needed.  The original Angular code uses a different endpoint for username.
+            `http://localhost:8080/instalearn/user/userList/${userId}` // Adjust API endpoint if needed.  The original Angular code uses a different endpoint for username.
           );
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
           const data = await response.json();
+          console.log(data.userName);
+          console.log(data.userName);
+
           setUserName(data.userName);
         } catch (error) {
           console.error("Error fetching username:", error);
@@ -79,11 +83,9 @@ function UserDashboard() {
         console.error("Error fetching dashboard data:", error);
       }
     };
-
-    // if (intId) {
+  
     fetchUserName();
     fetchDashboardData();
-    // }
 
     const fetchCourses = async () => {
       try {
@@ -99,7 +101,7 @@ function UserDashboard() {
     };
 
     fetchCourses();
-  }, []);
+  }, [userId]);
 
   return (
     <div className="ps-5 pe-5 py-4 bg-body-tertiary">
@@ -142,7 +144,7 @@ function UserDashboard() {
           <div className="row">
             <div className="col-md-8 pt-5 ps-3">
               <h3>
-                <i>Welcome Daanish</i>
+                <i>Welcome {userName}</i>
               </h3>
               <p className="fs-5 fw-light">
                 <i>

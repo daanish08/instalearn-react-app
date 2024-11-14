@@ -66,24 +66,24 @@ const CourseCard: React.FC<CourseCardProps> = ({
   const [enrollmentCount, setEnrollmentCount] = useState(0);
 
   // Fetch enrollment count when component mounts or when enrollment changes
-  useEffect(() => {
-    const fetchEnrollmentCount = async () => {
-      try {
-        const { data: count } = await axios.get(`http://localhost:8080/instalearn/api/v1/${id}/enroll/count`);
-        setEnrollmentCount(count);
-      } catch (error) {
-        console.error("Error fetching enrollment count:", error);
-      }
-    };
+  // useEffect(() => {
+  //   // const fetchEnrollmentCount = async () => {
+  //   //   try {
+  //   //     const { data: count } = await axios.get(`http://localhost:8080/instalearn/api/v1/${id}/enroll/count`);
+  //   //     setEnrollmentCount(count);
+  //   //   } catch (error) {
+  //   //     console.error("Error fetching enrollment count:", error);
+  //   //   }
+  //   // };
 
-    fetchEnrollmentCount();
-  }, [id, enrolled]); // Re-run when 'id' or 'enrolled' changes
+  //   fetchEnrollmentCount();
+  // }, [id, enrolled]); // Re-run when 'id' or 'enrolled' changes
 
   const handleEnroll = async (courseId: number) => {
-    if (enrollmentCount >= 1) {
-      toast.error("You are already enrolled in more than one course. Cannot enroll in additional courses.");
-      return;
-    }
+    // if (enrollmentCount >= 1) {
+    //   toast.error("You are already enrolled in more than one course. Cannot enroll in additional courses.");
+    //   return;
+    // }
 
     try {
       const response = await axios.post(`http://localhost:8080/instalearn/api/v1/U${id}/C${courseId}/enroll`);

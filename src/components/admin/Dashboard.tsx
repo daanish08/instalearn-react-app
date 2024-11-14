@@ -1,9 +1,14 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom"; // Assuming you're using react-router-dom
+import { useAuth } from "../../contexts/authContext";
 
 function AdminDashboard() {
   const [userName, setUserName] = useState("");
+
+  const {user} =useAuth();
+  const userId=user?.id;
+  
 
   const [adminDashBoardData, setAdminDashBoardData] = useState([
     {
@@ -32,32 +37,22 @@ function AdminDashboard() {
     },
   ]);
 
-  // const [courseManagementCards, setCourseManagementCards] = useState([
-  //   {
-  //     title: "Enroll New Course",
-  //     description:
-  //       "Efficiently design, implement, and oversee your courses with streamlined processes and comprehensive management tools.",
-  //     buttonText: "Enroll Now",
-  //     route: "/courses",
-  //     image: "/assets/EnrollCourse.jpg",
-  //   },
-  // ]);
-
+ 
   useEffect(() => {
-    const userId = localStorage.getItem("id");
-    console.log(userId);
-
-    const intId = userId ? parseInt(userId, 10) : null; // Parse to integer
-
-    const fetchUserName = async () => {
-      if (intId) {
+   
+       const fetchUserName = async () => {
+      if (userId) {
         try {
-          const response = await axios.get(
-            `http://localhost:8080/instalearn/admin/AdminList/${intId}` // Adjust API endpoint if needed.  The original Angular code uses a different endpoint for username.
+          const response = await fetch(
+            `http://localhost:8080/instalearn/admin/AdminList/${userId}` // Adjust API endpoint if needed.  The original Angular code uses a different endpoint for username.
           );
-          const data = response.data;
-          console.log(data);
-          setUserName(data.userName);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const data = await response.json();
+        
+          setUserName(data.name);
+         
         } catch (error) {
           console.error("Error fetching username:", error);
         }
@@ -103,7 +98,7 @@ function AdminDashboard() {
     fetchUserName();
     fetchDashboardData();
     // }
-  }, []);
+  }, [userId]);
 
   return (
     <div className="ps-5 pe-5 py-4 bg-body-tertiary">
@@ -147,7 +142,7 @@ function AdminDashboard() {
           <div className="row">
             <div className="col-md-8 pt-5 ps-3">
               <h3>
-                <i>Welcome Daanish</i>
+                <i>Welcome {userName}</i>
               </h3>
               <p className="fs-5 fw-light">
                 <i>
