@@ -67,8 +67,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const logout = (): void => {
+    const roleLowerCase = user?.role?.toLowerCase();
     setUser(null);
     localStorage.removeItem("user");
+    navigate(`${roleLowerCase}/login`);
   };
 
   useEffect(() => {

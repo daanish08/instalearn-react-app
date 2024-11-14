@@ -5,7 +5,7 @@ import { useAuth } from "../../contexts/authContext";
 function Header() {
 
 
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
 
   const userRole = user?.role;
@@ -31,7 +31,7 @@ function Header() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarCollapse">
-          <MenuList userRole={userRole}/>
+          <MenuList userRole={userRole} onLogout={logout}/>
         </div>
       </div>
     </nav>

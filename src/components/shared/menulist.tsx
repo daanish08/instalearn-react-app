@@ -1,5 +1,15 @@
 import { NavLink } from "react-router-dom";
 
+interface MenuListProps {
+  userRole: string;
+  onLogout: () => void;
+}
+
+interface IMenu {
+  path: string;
+  label: string;
+}
+
 const generalMenus = [
   { path: "/", label: "Home" },
   { path: "/courses", label: "Courses" },
@@ -15,7 +25,6 @@ const userMenus = [
   { path: "/about", label: "About" },
   { path: "/contact", label: "Contact" },
   { path: "/user/profile", label: "Profile" },
-  { path: "/", label: "Logout" },
 ];
 
 const adminMenus = [
@@ -23,14 +32,13 @@ const adminMenus = [
   { path: "admin/dashboard", label: "Dashboard" },
   { path: "/admin/users", label: "Users" },
   { path: "/admin/profile", label: "Profile" },
-  { path: "/", label: "Logout" },
 ];
 
 // const userRole="ADMIN"
-const MenuList = ({ userRole }) => {
+const MenuList = ({ userRole, onLogout }: MenuListProps) => {
   console.log(userRole);
-  const renderMenu = (menus) =>
-    menus.map((item) => (
+  const renderMenu = (menus: IMenu[]) =>
+    menus.map((item: IMenu) => (
       <li key={item.path} className="nav-item">
         <NavLink
           className="nav-link text-white"
@@ -44,9 +52,18 @@ const MenuList = ({ userRole }) => {
 
   return (
     <ul className="navbar-nav justify-content-end mb-2 ms-auto gap-4 mb-md-0">
-      {(userRole === "" ||userRole === null || userRole === undefined && renderMenu(generalMenus))}{" "}
+      {userRole === "" ||
+        userRole === null ||
+        (userRole === undefined && renderMenu(generalMenus))}{" "}
       {userRole === "USER" && renderMenu(userMenus)}{" "}
       {userRole === "ADMIN" && renderMenu(adminMenus)}{" "}
+      {!!userRole ? (
+        <button className="btn text-white" onClick={onLogout}>
+          Logout
+        </button>
+      ) : (
+        ""
+      )}
     </ul>
   );
 };
