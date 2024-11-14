@@ -1,7 +1,12 @@
+
+import axios from "axios";
 import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import {  useNavigate } from "react-router-dom";
 
 const Contact = () => {
+
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     contact: "",
@@ -20,8 +25,18 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log("Form submitted:", formData);
+    console.log(formData)
+    const response =  axios.post(`http://localhost:8080/instalearn/admin/feedbacks/add`, formData);
+    console.log("Form submitted:", response);
+   
+    setFormData({
+      name: "",
+      comment: "",
+      enquiryType: "",
+      contact:""
+    });
+
+    navigate("/");
   };
 
   return (
