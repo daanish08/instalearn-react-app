@@ -10,7 +10,7 @@ const Footer = function () {
       <div>
         <MenuList userRole="" onLogout={() => {}} />
         <br />
-        <p>
+        <p className="pb-3">
           <b>&copy;</b>Copyright {copyrightYear} | <b>INSTA LEARN</b>
         </p>
       </div>

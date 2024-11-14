@@ -29,6 +29,7 @@ const LoginComponent = ({ userType }: LoginComponentProps) => {
     try {
       await login(data);
       setTimeout(() => {}, 200); // 200ms delay
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       setTimeout(() => {
         toast.error("Login failed. Please try again.", { autoClose: 2000 });
@@ -45,7 +46,7 @@ const LoginComponent = ({ userType }: LoginComponentProps) => {
         <title>{capitalizedUserType} Login</title>
       </Helmet>
       <div className="col-md-6 login-image">
-        <img src={loginImg} width={600} height={580} />
+        <img src={loginImg} width="100%" height="100%" />
       </div>
       <div className="col-md-6 d-flex py-5 justify-content-center">
         <div className=" w-75 py-5 px-3 ">

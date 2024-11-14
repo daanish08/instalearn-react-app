@@ -42,13 +42,13 @@ const Subsection = () => {
     <div className="">
       <div className="px-3 mt-4 bg-light-blue">
         <div
-          className="px-4 py-5 my-3 mt-0 text-center text-white fw-semibold"
+          className="px-4 py-5 my-5 mt-0 text-center text-white fw-semibold"
           id="home"
         >
-          <p className="lead mb-4 text-white">
+          <p className="lead mb-5 text-white">
             In look for a technical Course?
           </p>
-          <h1 className="display-4 text-white">
+          <h1 className="display-3 text-white">
             Start{" "}
             <u>
               <span className="fw-bold">learning</span>

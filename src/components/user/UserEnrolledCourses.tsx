@@ -54,45 +54,53 @@ function UserEnrolledCourses() {
           </tr>
         </thead>
         <tbody>
-          {enrollments.map((enrollment: IEnrollment) => (
-            <tr key={enrollment.enrollmentId}>
-              <td>{enrollment.enrollmentId}</td>
-              <td>{enrollment.course.courseName}</td>
-              <td>{enrollment.status}</td>
-              <td>
-                <button
-                  className={`btn fw-bold btn-success`}
-                  style={{ width: "100px" }}
-                  onClick={() => {
-                    // Handle navigation or action based on status
-                    if (enrollment.status === "APPROVED") {
-                      // Navigate to course details
-                      window.location.href = `/courses/${enrollment.course.courseId}`; // Or use React Router
-                    }
-                  }}
-                  disabled={enrollment.status !== "APPROVED"}
-                >
-                  {enrollment.status === "APPROVED"
-                    ? "View"
-                    : enrollment.status}
-                </button>
-              </td>
-              <td>
-                <button
-                  className={`btn fw-semibold btn-dark bg-${enrollment.status.toLowerCase()}`}
-                  style={{ width: "100px" }}
-                  onClick={() => {
-                    if (enrollment.status === "APPROVED") {
-                      navigate(`/course/${enrollment.course.courseId}/success`); // Or use React Router
-                    }
-                  }}
-                  disabled={enrollment.status !== "APPROVED"}
-                >
-                  {enrollment.status === "APPROVED" ? "Download" : "Waiting"}
-                </button>
-              </td>
-            </tr>
-          ))}
+          {enrollments.length > 0 ? (
+            enrollments.map((enrollment: IEnrollment) => (
+              <tr key={enrollment.enrollmentId}>
+                <td>{enrollment.enrollmentId}</td>
+                <td>{enrollment.course.courseName}</td>
+                <td>{enrollment.status}</td>
+                <td>
+                  <button
+                    className={`btn fw-bold btn-success`}
+                    style={{ width: "100px" }}
+                    onClick={() => {
+                      // Handle navigation or action based on status
+                      if (enrollment.status === "APPROVED") {
+                        // Navigate to course details
+                        window.location.href = `/courses/${enrollment.course.courseId}`; // Or use React Router
+                      }
+                    }}
+                    disabled={enrollment.status !== "APPROVED"}
+                  >
+                    {enrollment.status === "APPROVED"
+                      ? "View"
+                      : enrollment.status}
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className={`btn fw-semibold btn-dark bg-${enrollment.status.toLowerCase()}`}
+                    style={{ width: "100px" }}
+                    onClick={() => {
+                      if (enrollment.status === "APPROVED") {
+                        navigate(
+                          `/course/${enrollment.course.courseId}/success`
+                        ); // Or use React Router
+                      }
+                    }}
+                    disabled={enrollment.status !== "APPROVED"}
+                  >
+                    {enrollment.status === "APPROVED" ? "Download" : "Waiting"}
+                  </button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <p className=" alert alert-danger m-3 text-center text-muted  fw-bold">
+              No enrollments found.
+            </p>
+          )}
         </tbody>
       </table>
     </div>

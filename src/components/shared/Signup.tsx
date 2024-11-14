@@ -33,7 +33,7 @@ const Signup = ({ userType }: SignupProps) => {
 
     axios
       .post(url, data)
-      .then((_response) => {
+      .then(() => {
         navigate(`/${userType}/login`);
         toast(`${userType} registered successfully`);
       })
@@ -59,7 +59,7 @@ const Signup = ({ userType }: SignupProps) => {
   return (
     <div className="d-flex bg-body-tertiary pt-3" style={{ height: "580px" }}>
       <div className="col-md-6 register-image">
-        <img src={SignupImg} width={600} height={580} alt="Login" />
+        <img src={SignupImg} width="100%" height="100%" alt="Login" />
       </div>
       <div className="col-md-6 d-flex align-items-center justify-content-center">
         <form className="w-75" onSubmit={handleSubmit(onSubmit)}>
@@ -96,6 +96,22 @@ const Signup = ({ userType }: SignupProps) => {
           </div>
 
           <div className="form-group py-2">
+            <label htmlFor="phone" className="pb-1">
+              Contact No.
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="phone"
+              placeholder="Enter contact No."
+              {...register("phone", { validate: contactNumberValidator })}
+            />
+            {errors.phone && (
+              <div className="text-danger">{getErrorMessage(errors.phone)}</div>
+            )}
+          </div>
+
+          <div className="form-group py-2">
             <label htmlFor="email" className="pb-1">
               Email address
             </label>
@@ -114,22 +130,6 @@ const Signup = ({ userType }: SignupProps) => {
             />
             {errors.email && (
               <div className="text-danger">{getErrorMessage(errors.email)}</div>
-            )}
-          </div>
-
-          <div className="form-group py-2">
-            <label htmlFor="phone" className="pb-1">
-              Contact No.
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="phone"
-              placeholder="Enter contact No."
-              {...register("phone", { validate: contactNumberValidator })}
-            />
-            {errors.phone && (
-              <div className="text-danger">{getErrorMessage(errors.phone)}</div>
             )}
           </div>
 

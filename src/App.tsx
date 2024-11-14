@@ -10,8 +10,7 @@ import LoginComponent from "./components/shared/Login";
 import Signup from "./components/shared/Signup";
 import GenerateCertificate from "./pages/GenerateCertificate";
 import UserList from "./components/admin/UserList";
-import Header from "./components/shared/header";
-import Footer from "./components/shared/footer";
+
 import PendingEnrollments from "./components/admin/PendingEnrollments";
 import CourseForm from "./components/courses/CourseForm";
 import UserDashboard from "./components/user/DashBoard";
@@ -21,6 +20,8 @@ import Feedback from "./pages/Feedback";
 import AdminDashboard from "./components/admin/Dashboard";
 import Profile from "./components/shared/Profile";
 import { ToastContainer } from "react-toastify";
+import Header from "./components/shared/header";
+import Footer from "./components/shared/footer";
 
 const App = () => {
   return (
@@ -46,8 +47,6 @@ const App = () => {
               path="/admin/approve-courses"
               element={<PendingEnrollments />}
             />
-
-            
 
             <Route path="/admin/users" element={<UserList />} />
             <Route path="/admin/signup" element={<Signup userType="admin" />} />

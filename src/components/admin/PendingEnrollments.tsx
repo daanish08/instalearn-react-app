@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { IEnrollment } from "../../models/IEnrollment";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useAuth } from "../../contexts/authContext";
 
 const ApproveCourses: React.FC = () => {
@@ -58,11 +60,11 @@ const ApproveCourses: React.FC = () => {
     await axios
       .put(updateUrl)
       .then(() => {
-        alert("Enrollment Status Updated!");
+        toast.success("Enrollment updated successfully");
         loadEnrollmentList();
       })
       .catch(() => {
-        alert(
+        toast.error(
           `Failed to update status for enrollment ID ${enrollment.enrollmentId}`
         );
         loadEnrollmentList();
@@ -77,7 +79,7 @@ const ApproveCourses: React.FC = () => {
       </h1>
 
       <table className="table table-bordered mt-4 table-hover">
-        <thead className="table-success" style={{ color: "blue" }}>
+        <thead className="table" style={{ color: "blue" }}>
           <tr>
             <th>Enrollment ID</th>
             <th>Username</th>
@@ -88,7 +90,7 @@ const ApproveCourses: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {enrollments.map((enrollment) => (
+          {enrollments.length> 0 ? enrollments.map((enrollment) => (
             <tr key={enrollment.enrollmentId}>
               <td>{enrollment.enrollmentId}</td>
               <td>{enrollment.user.userName}</td>
@@ -122,7 +124,8 @@ const ApproveCourses: React.FC = () => {
                 </button>
               </td>
             </tr>
-          ))}
+          )): 
+          <p className="alert alert-danger text-center text-muted mt-3 fw-bold">No enrollments found.</p>}
         </tbody>
       </table>
     </div>

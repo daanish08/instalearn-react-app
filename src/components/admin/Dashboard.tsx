@@ -154,7 +154,7 @@ function AdminDashboard() {
             </div>
             <div className="col-md-4 text-center">
               <img
-                src="../src/assets/image/dashboard-hero.jpg"
+                src="../src/assets/image/admin-dashboard.png"
                 width={250}
                 height={250}
                 style={{ borderRadius: "20px" }}

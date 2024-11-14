@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 
 interface MenuListProps {
-  userRole: string;
+  userRole: string | undefined;
   onLogout: () => void;
 }
 
