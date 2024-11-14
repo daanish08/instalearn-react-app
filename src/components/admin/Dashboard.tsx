@@ -9,6 +9,8 @@ function AdminDashboard() {
   const { user } = useAuth();
   const userId = user?.id;
 
+ 
+
   const [adminDashBoardData, setAdminDashBoardData] = useState([
     {
       title: "Users List",
@@ -90,22 +92,24 @@ function AdminDashboard() {
       }
     };
 
-    // if (intId) {
     fetchUserName();
     fetchDashboardData();
-    // }
+ 
   }, [userId]);
 
+ 
+
+
   return (
-    <div className="ps-5 pe-5 py-4 bg-body-tertiary">
-      <div className="mt-2">
+    <div className="ps-5 pe-5 py-5 bg-body-tertiary">
+      <div className="">
         <div className="row">
           <div className="col-md-3 d-flex px-1">
             {adminDashBoardData.map((data) => (
               <div key={data.title} className="col-md-12 px-1">
                 <div
                   className="card border border-2 mb-3"
-                  style={{ backgroundColor: "#1e1357" }}
+                  style={{backgroundColor:"#1e1357"}}
                 >
                   <div className="card-header fw-light fs-4 text-center text-white">
                     {data.title}

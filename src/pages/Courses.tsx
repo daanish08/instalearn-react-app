@@ -68,7 +68,7 @@ const Courses = () => {
       <Helmet>
         <title>Courses</title>
       </Helmet>
-      <div className="container py-3 bg-body-tertiary">
+      <div className="container py-4 bg-body-tertiary">
         <div className="row ">
           <h1 className="pt-3 pb-2 gradient-text">
             <span className="fw-light">Available </span>Courses{" "}

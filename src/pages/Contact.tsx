@@ -46,14 +46,14 @@ const Contact = () => {
       </Helmet>
       <div className="gradient-background text-navy">
         <div
-          className="px-4   mt-0 text-center"
-          style={{ paddingTop: "100px" }}
+          className="px-4  text-center"
+          style={{ marginTop:"30px",paddingTop: "100px" ,paddingBottom:"90px"}}
         >
-          <h1 className="text-navy fw-semibold">CONTACT</h1>
+          <h1 className="text-navy fw-bold display-4 pb-3">CONTACT</h1>
           <h3 className="display-5  pb-5  fw-semibold gradient-text">
-            "Join our vibrant online language learning community and connect{" "}
+            <i>"Join our vibrant online language learning community and connect{" "}
             <br />
-            with us."
+            with us."</i>"
           </h3>
           <a href="#form">
             <svg

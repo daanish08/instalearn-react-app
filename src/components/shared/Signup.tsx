@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useForm, FieldError } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import SignupImg from "../../assets/image/signup.jpg";
 import { toast } from "react-toastify";
-import login from "../../assets/image/login.jpg";
 
 type SignupProps = {
   userType: string;
@@ -57,9 +57,9 @@ const Signup = ({ userType }: SignupProps) => {
     error ? error.message : "";
 
   return (
-    <div className="d-flex bg-body-tertiary" style={{ height: "580px" }}>
+    <div className="d-flex bg-body-tertiary pt-3" style={{ height: "580px" }}>
       <div className="col-md-6 register-image">
-        <img src={login} width={600} height={580} alt="Login" />
+        <img src={SignupImg} width={600} height={580} alt="Login" />
       </div>
       <div className="col-md-6 d-flex align-items-center justify-content-center">
         <form className="w-75" onSubmit={handleSubmit(onSubmit)}>
