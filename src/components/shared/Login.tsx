@@ -3,6 +3,7 @@ import loginImg from "../../assets/image/login.jpg";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/authContext";
 import { Helmet } from "react-helmet-async";
+import { ToastContainer, toast } from "react-toastify";
 
 interface ICredentials {
   email: string;
@@ -23,9 +24,18 @@ const LoginComponent = ({ userType }: LoginComponentProps) => {
   } = useForm<ICredentials>();
   const { login } = useAuth();
 
-  const onSubmit = (data: ICredentials) => {
+  const onSubmit = async (data: ICredentials) => {
     console.log(`${userType} Form Data:`, data);
-    login(data);
+    try {
+      await login(data);
+      setTimeout(() => {
+        toast.success("Login successful!", { autoClose: 2000 });
+      }, 200); // 200ms delay
+    } catch (error) {
+      setTimeout(() => {
+        toast.error("Login failed. Please try again.", { autoClose: 2000 });
+      }, 200); // 200ms delay
+    }
   };
 
   return (
@@ -110,6 +120,18 @@ const LoginComponent = ({ userType }: LoginComponentProps) => {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };

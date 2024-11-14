@@ -5,17 +5,18 @@ import { useNavigate } from "react-router-dom";
 import CourseCard from "../components/courses/CourseCard";
 import { Helmet } from "react-helmet-async";
 import { useAuth } from "../contexts/authContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Courses = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [courseList, setCourseList] = useState<ICourse[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-
-  const { user} = useAuth();
-  const role=user?.role;
+  const { user } = useAuth();
+  const role = user?.role;
+  const userId = user?.id;
   console.log(role);
-  
 
   useEffect(() => {
     async function getCourses() {
@@ -25,7 +26,6 @@ const Courses = () => {
         );
         setIsLoading(false);
         setCourseList(response.data);
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
         setIsLoading(false);
         setError("Failed to fetch course data. Please try again later.");
@@ -49,14 +49,18 @@ const Courses = () => {
   const handleDelete = async (id: number) => {
     try {
       // Sending DELETE request to the API
-      await axios.delete(`http://localhost:8080/instalearn/admin/A1/C2/delete`);
+      await axios.delete(
+        `http://localhost:8080/instalearn/admin/A${userId}/C${id}/delete`
+      );
       console.log(`Course with id: ${id} deleted successfully`);
 
       // Update the course list to remove the deleted course
       setCourseList(courseList.filter((course) => course.courseId !== id));
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
+      // Show success toast
+      toast.success("Course deleted successfully!");
     } catch (error) {
-      alert("Failed to delete the course. Please try again later.");
+      toast.error("Failed to delete the course. Please try again later.");
     }
   };
 
@@ -91,17 +95,18 @@ const Courses = () => {
             courseList.map((course: ICourse) => {
               return (
                 <CourseCard
-                  key={course.courseId} 
+                  key={course.courseId}
                   course={course}
-                  handleView={handleView} 
-                  handleUpdate={handleUpdate} 
-                  handleDelete={handleDelete} 
+                  handleView={handleView}
+                  handleUpdate={handleUpdate}
+                  handleDelete={handleDelete}
                   role={role}
                 />
               );
             })}
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };
