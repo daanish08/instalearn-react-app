@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ICourse } from "../../models/ICourse";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
@@ -26,26 +26,26 @@ const getRandomLogo = () => {
 
   return logos[Math.floor(Math.random() * logos.length)];
 };
+
 const getRandomGradient = () => {
   const gradients = [
-    "linear-gradient(135deg, #2C3E50, #4CA1AF)", // Dark blue to teal
-    "linear-gradient(135deg, #232526, #414345)", // Dark gray to lighter gray
-    "linear-gradient(135deg, #0F2027, #2C5364)", // Black to dark cyan
-    "linear-gradient(135deg, #3A1C71, #D76D77)", // Dark purple to dark pink
-    "linear-gradient(135deg, #1C1C1C, #383838)", // Dark gray to medium gray
-    // New gradients
-    "linear-gradient(to right, #f7971e, #ffd200)", // Orange to Yellow
-    "linear-gradient(to right, #49D49D, #A2D9CE)", // Green to Light Green
-    "linear-gradient(to right, #8E2DE2, #4A00E0)", // Purple to Dark Purple
-    "linear-gradient(to bottom, #007bff, #0069d9)", // Blue to Darker Blue
-    "linear-gradient(to right, #ff5733, #c70039)", // Red to Dark Red
-    "linear-gradient(to right, #e6b8af, #946f5f)", // Pink to Brown
-    "linear-gradient(to right, #2980B9, #6DD5FA)", // Blue to Light Blue
-    "linear-gradient(to right, #FF416C, #FF4B2B)", // Pink/Red to Orange
-    "linear-gradient(to bottom, #7474BF, #348AC7)", // Purple to Blue
-    "linear-gradient(to right, #00b09b, #96c93d)", // Teal to Green
-    "radial-gradient(circle, #FF6138, #FF9848)", // Orange Radial
-    "radial-gradient(ellipse at center, #1E3C72, #2A5298)", // Blue Radial
+    "linear-gradient(135deg, #2C3E50, #4CA1AF)",
+    "linear-gradient(135deg, #232526, #414345)",
+    "linear-gradient(135deg, #0F2027, #2C5364)",
+    "linear-gradient(135deg, #3A1C71, #D76D77)",
+    "linear-gradient(135deg, #1C1C1C, #383838)",
+    "linear-gradient(to right, #f7971e, #ffd200)",
+    "linear-gradient(to right, #49D49D, #A2D9CE)",
+    "linear-gradient(to right, #8E2DE2, #4A00E0)",
+    "linear-gradient(to bottom, #007bff, #0069d9)",
+    "linear-gradient(to right, #ff5733, #c70039)",
+    "linear-gradient(to right, #e6b8af, #946f5f)",
+    "linear-gradient(to right, #2980B9, #6DD5FA)",
+    "linear-gradient(to right, #FF416C, #FF4B2B)",
+    "linear-gradient(to bottom, #7474BF, #348AC7)",
+    "linear-gradient(to right, #00b09b, #96c93d)",
+    "radial-gradient(circle, #FF6138, #FF9848)",
+    "radial-gradient(ellipse at center, #1E3C72, #2A5298)",
   ];
 
   return gradients[Math.floor(Math.random() * gradients.length)];
@@ -58,27 +58,39 @@ const CourseCard: React.FC<CourseCardProps> = ({
   handleView,
   role,
 }) => {
+  const { user } = useAuth();
+  const id = user?.id;
 
-  const {user} =useAuth();
-  const id= user?.id;
-  
-  
   const navigate = useNavigate();
   const [enrolled, setEnrolled] = useState(false);
+  const [enrollmentCount, setEnrollmentCount] = useState(0);
+
+  // Fetch enrollment count when component mounts or when enrollment changes
+  useEffect(() => {
+    const fetchEnrollmentCount = async () => {
+      try {
+        const { data: count } = await axios.get(`http://localhost:8080/instalearn/api/v1/${id}/enroll/count`);
+        setEnrollmentCount(count);
+      } catch (error) {
+        console.error("Error fetching enrollment count:", error);
+      }
+    };
+
+    fetchEnrollmentCount();
+  }, [id, enrolled]); // Re-run when 'id' or 'enrolled' changes
 
   const handleEnroll = async (courseId: number) => {
-    try {
+    if (enrollmentCount >= 1) {
+      toast.error("You are already enrolled in more than one course. Cannot enroll in additional courses.");
+      return;
+    }
 
-      const count = await axios.get(`http://localhost:8080/instalearn/api/v1/${id}/enroll/count`);
-      console.log(count);
-      
-      
+    try {
       const response = await axios.post(`http://localhost:8080/instalearn/api/v1/U${id}/C${courseId}/enroll`);
-      console.log(response);
       
       if (response.status === 200 || response.status === 201) {
         setEnrolled(true);
-        toast.success("Enrolled successfully! Redirecting to dashboard...");     
+        toast.success("Enrolled successfully! Redirecting to dashboard...");
         setTimeout(() => {
           navigate(`/user/dashboard`);
         }, 3000);
@@ -96,10 +108,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
   };
 
   return (
-    <div
-      className="col-md-4 "
-      style={{ minHeight: "400px", overflowY: "auto" }}
-    >
+    <div className="col-md-4" style={{ minHeight: "400px", overflowY: "auto" }}>
       <div className="card border border-0" style={cardStyle}>
         <img
           src={getRandomLogo()}
@@ -114,7 +123,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
             borderTopRightRadius: "10px",
           }}
         />
-        <div className="card-body text-center ">
+        <div className="card-body text-center">
           <h5 className="card-title fw-semibold fs-4">{course.courseName}</h5>
           <p className="card-text">
             {course.instructor || "Tharun"} | {course.duration || "18"} Hrs
@@ -146,10 +155,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
             {!role && (
               <button
-                onClick={() => {
-                  navigate(`/user/login`);
-                }}
-                className="btn btn-warning  px-4 mx-4"
+                onClick={() => navigate(`/user/login`)}
+                className="btn btn-warning px-4 mx-4"
                 disabled={enrolled}
               >
                 {enrolled ? "ENROLLED" : "ENROLLING"}
@@ -157,7 +164,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
             )}
             {role === "USER" && (
               <button
-                onClick={() => handleEnroll(course.courseId)} // Pass courseId when calling handleEnroll
+                onClick={() => handleEnroll(course.courseId)}
                 className="btn btn-warning px-4 mx-4"
                 disabled={enrolled}
               >

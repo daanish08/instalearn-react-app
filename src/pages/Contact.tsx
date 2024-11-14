@@ -45,7 +45,7 @@ const Contact = () => {
               xmlns="http://www.w3.org/2000/svg"
               width="30"
               height="30"
-              fill="white"
+              fill="navy"
               className="bi bi-arrow-down-circle-fill"
               viewBox="0 0 16 16"
             >
