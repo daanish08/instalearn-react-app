@@ -227,7 +227,7 @@ function AdminDashboard() {
                   <br />
                   <br />
                   <Link
-                    to={"/admin/create-courses"}
+                    to={"/courses"}
                     className="btn btn-light fw-semibold"
                   >
                     Update Now
