@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ICourse } from "../../models/ICourse";
+import { useAuth } from "../../contexts/authContext";
 
 const CourseDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -9,6 +10,9 @@ const CourseDetails = () => {
   const [course, setCourse] = useState<ICourse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const { user } = useAuth();
+  const role = user?.role;
 
   useEffect(() => {
     const fetchCourseDetails = async () => {
@@ -104,11 +108,15 @@ const CourseDetails = () => {
                 </button>
               )}
 
-              <div className="ms-auto">
-                <button onClick={handleFinish} className="btn btn-success">
-                  Finish
-                </button>
-              </div>
+              {role === "USER" ? (
+                <div className="ms-auto">
+                  <button onClick={handleFinish} className="btn btn-success">
+                    Finish
+                  </button>
+                </div>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>
