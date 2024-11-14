@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ICourse } from "../../models/ICourse";
@@ -69,7 +69,8 @@ const CourseDetails = () => {
               <strong>Duration:</strong> {course.duration || "18"} Hrs
             </p>
             <p className="card-text">
-              <strong>Description:</strong> {course.description || "No description available."}
+              <strong>Description:</strong>{" "}
+              {course.description || "No description available."}
             </p>
             <div className="d-flex justify-content-start">
               {course.githubURL && (
@@ -83,9 +84,18 @@ const CourseDetails = () => {
               {course.driveURL && (
                 <button
                   onClick={() => handleNavigate(course.driveURL)}
-                  className="btn btn-secondary"
+                  className="btn btn-warning me-2"
                 >
                   Drive
+                </button>
+              )}
+
+              {course.courseURL && (
+                <button
+                  onClick={() => handleNavigate(course.courseURL)}
+                  className="btn btn-success me-2"
+                >
+                  Video
                 </button>
               )}
             </div>
