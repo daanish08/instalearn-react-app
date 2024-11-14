@@ -3,8 +3,8 @@ export interface ICourse {
   courseName: string;
   instructor: string;
   description: string;
-  duration: string; 
+  duration: string;
   courseURL: string;
   githubURL: string;
-  driveURL: string; 
+  driveURL: string;
 }
