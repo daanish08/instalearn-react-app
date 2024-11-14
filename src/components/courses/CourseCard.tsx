@@ -62,34 +62,13 @@ const CourseCard: React.FC<CourseCardProps> = ({
   const id = user?.id;
 
   const navigate = useNavigate();
-  const [enrolled, setEnrolled] = useState(false);
-  const [enrollmentCount, setEnrollmentCount] = useState(0);
-
-  // Fetch enrollment count when component mounts or when enrollment changes
-  // useEffect(() => {
-  //   // const fetchEnrollmentCount = async () => {
-  //   //   try {
-  //   //     const { data: count } = await axios.get(`http://localhost:8080/instalearn/api/v1/${id}/enroll/count`);
-  //   //     setEnrollmentCount(count);
-  //   //   } catch (error) {
-  //   //     console.error("Error fetching enrollment count:", error);
-  //   //   }
-  //   // };
-
-  //   fetchEnrollmentCount();
-  // }, [id, enrolled]); // Re-run when 'id' or 'enrolled' changes
 
   const handleEnroll = async (courseId: number) => {
-    // if (enrollmentCount >= 1) {
-    //   toast.error("You are already enrolled in more than one course. Cannot enroll in additional courses.");
-    //   return;
-    // }
 
     try {
       const response = await axios.post(`http://localhost:8080/instalearn/api/v1/U${id}/C${courseId}/enroll`);
       
       if (response.status === 200 || response.status === 201) {
-        setEnrolled(true);
         toast.success("Enrolled successfully! Redirecting to dashboard...");
         setTimeout(() => {
           navigate(`/user/dashboard`);
@@ -157,18 +136,18 @@ const CourseCard: React.FC<CourseCardProps> = ({
               <button
                 onClick={() => navigate(`/user/login`)}
                 className="btn btn-warning px-4 mx-4"
-                disabled={enrolled}
+                disabled={course.enrolled}
               >
-                {enrolled ? "ENROLLED" : "ENROLL"}
+                {course.enrolled ? "ENROLLED" : "ENROLL"}
               </button>
             )}
             {role === "USER" && (
               <button
                 onClick={() => handleEnroll(course.courseId)}
                 className="btn btn-warning px-4 mx-4"
-                disabled={enrolled}
+                disabled={course.enrolled}
               >
-                {enrolled ? "ENROLLED" : "ENROLL NOW"}
+                {course.enrolled ? "ENROLLED" : "ENROLL NOW"}
               </button>
             )}
           </div>

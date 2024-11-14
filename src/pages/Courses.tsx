@@ -20,10 +20,7 @@ const Courses = () => {
 
   useEffect(() => {
     async function getCourses() {
-      const apiUrl =
-        // role === "ADMIN"
-        //   ? `http://localhost:8080/instalearn/admin/${userId}/courses`
-           "http://localhost:8080/instalearn/api/v1/course/list";
+      const apiUrl = `http://localhost:8080/instalearn/api/v1/course/user/${userId}/list`;
       try {
         const response = await axios.get(apiUrl);
         setIsLoading(false);
@@ -33,8 +30,8 @@ const Courses = () => {
         setError("Failed to fetch course data. Please try again later.");
       }
     }
-    getCourses();
-  }, []);
+    if (userId) getCourses();
+  }, [user]);
 
   const navigate = useNavigate();
 

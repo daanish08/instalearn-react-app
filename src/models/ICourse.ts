@@ -7,4 +7,5 @@ export interface ICourse {
   courseURL: string;
   githubURL: string;
   driveURL: string;
+  enrolled?: boolean;
 }
