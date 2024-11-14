@@ -13,8 +13,7 @@ interface IProfile {
 function Profile() {
   const { user } = useAuth();
   const [profile, setProfile] = useState<IProfile | null>(null);
-  // const [password, setPassword] = useState<string>("");
-  // const [passwordTouched, setPasswordTouched] = useState<boolean>(false);
+ 
 
   useEffect(() => {
     if (user && user.role) {

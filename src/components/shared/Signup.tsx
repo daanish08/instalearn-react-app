@@ -33,7 +33,7 @@ const Signup = ({ userType }: SignupProps) => {
 
     axios
       .post(url, data)
-      .then((response) => {
+      .then((_response) => {
         navigate(`/${userType}/login`);
         toast(`${userType} registered successfully`);
       })

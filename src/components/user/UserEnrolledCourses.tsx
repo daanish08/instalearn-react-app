@@ -4,7 +4,6 @@ import { useAuth } from "../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
 
 function UserEnrolledCourses() {
-
   const navigate = useNavigate();
   const [enrollments, setEnrollments] = useState([]);
   const { user } = useAuth();

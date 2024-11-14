@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { useAuth } from "../contexts/authContext";
@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 // Placeholder for your services – replace with your actual API calls
 
 const userService = {
-  getUserName: async (userId) => {
+  getUserName: async (userId: any) => {
     const response = await fetch(
       `http://localhost:8080/instalearn/user/userList/${userId}`
     );
@@ -18,7 +18,7 @@ const userService = {
 };
 
 const courseService = {
-  getcourseDetailsById: async (courseId) => {
+  getcourseDetailsById: async (courseId: any) => {
     const response = await axios.get(
       `http://localhost:8080/instalearn/api/v1/course/${courseId}`
     );

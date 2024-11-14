@@ -63,12 +63,6 @@ const CourseDetails = () => {
     <div className="container mt-5">
       {course && (
         <div className="card mb-3">
-          {/* <img
-            src={course.courseURL || "src/assets/image/Course-logo.png"}
-            className="card-img-top"
-            alt={course.courseName}
-            style={{ maxHeight: "400px", objectFit: "cover" }}
-          /> */}
           <div className="card-body">
             <h1 className="card-title">{course.courseName}</h1>
             <p className="card-text">

@@ -28,9 +28,7 @@ const LoginComponent = ({ userType }: LoginComponentProps) => {
     console.log(`${userType} Form Data:`, data);
     try {
       await login(data);
-      setTimeout(() => {
-        
-      }, 200); // 200ms delay
+      setTimeout(() => {}, 200); // 200ms delay
     } catch (error) {
       setTimeout(() => {
         toast.error("Login failed. Please try again.", { autoClose: 2000 });
@@ -94,7 +92,9 @@ const LoginComponent = ({ userType }: LoginComponentProps) => {
                   })}
                 />
                 {errors.password && (
-                  <div className="text-danger py-1">{errors.password.message}</div>
+                  <div className="text-danger py-1">
+                    {errors.password.message}
+                  </div>
                 )}
               </div>
               <button
@@ -112,7 +112,8 @@ const LoginComponent = ({ userType }: LoginComponentProps) => {
                     to={`/${userType}/signup`}
                     className="text-decoration-none text-navy border-bottom fw-semibold"
                   >
-                   {" "} Register here
+                    {" "}
+                    Register here
                   </Link>
                 </p>
               </div>

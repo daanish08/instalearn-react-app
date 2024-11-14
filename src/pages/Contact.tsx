@@ -1,11 +1,9 @@
-
 import axios from "axios";
 import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Contact = () => {
-
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
@@ -25,15 +23,18 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData)
-    const response =  axios.post(`http://localhost:8080/instalearn/admin/feedbacks/add`, formData);
+    console.log(formData);
+    const response = axios.post(
+      `http://localhost:8080/instalearn/admin/feedbacks/add`,
+      formData
+    );
     console.log("Form submitted:", response);
-   
+
     setFormData({
       name: "",
       comment: "",
       enquiryType: "",
-      contact:""
+      contact: "",
     });
 
     navigate("/");
@@ -47,13 +48,20 @@ const Contact = () => {
       <div className="gradient-background text-navy">
         <div
           className="px-4  text-center"
-          style={{ marginTop:"30px",paddingTop: "100px" ,paddingBottom:"90px"}}
+          style={{
+            marginTop: "30px",
+            paddingTop: "100px",
+            paddingBottom: "90px",
+          }}
         >
           <h1 className="text-navy fw-bold display-4 pb-3">CONTACT</h1>
           <h3 className="display-5  pb-5  fw-semibold gradient-text">
-            <i>"Join our vibrant online language learning community and connect{" "}
-            <br />
-            with us."</i>"
+            <i>
+              "Join our vibrant online language learning community and connect{" "}
+              <br />
+              with us."
+            </i>
+            "
           </h3>
           <a href="#form">
             <svg
@@ -139,8 +147,10 @@ const Contact = () => {
             </select>
           </div>
           <br />
-          <button className="bg-navy border-0 py-1 mb-3  rounded-pill text-white px-3"
-              style={{ backgroundColor: "#000B58" }}>
+          <button
+            className="bg-navy border-0 py-1 mb-3  rounded-pill text-white px-3"
+            style={{ backgroundColor: "#000B58" }}
+          >
             Submit
           </button>
         </form>

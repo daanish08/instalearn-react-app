@@ -1,5 +1,5 @@
 export interface IEnrollment {
-  enrollmentId: number; // Or string, depending on your API response
+  enrollmentId: number;
   user: {
     userId: number;
     userName: string;
@@ -8,8 +8,8 @@ export interface IEnrollment {
     email: string;
   };
   course: {
-    courseId: number; // Or string
+    courseId: number;
     courseName: string;
   };
-  status: "APPROVED" | "PENDING" | "REJECTED"; // Enumerate possible statuses
+  status: "APPROVED" | "PENDING" | "REJECTED";
 }

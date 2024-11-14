@@ -6,8 +6,6 @@ const Home = () => {
       <Helmet>
         <title>Home</title>
       </Helmet>
-      {/* Home
-    <Hero/> */}
       <Subsection />
     </div>
   );

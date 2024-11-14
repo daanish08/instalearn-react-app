@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom"; // Assuming you're using react-router-dom
 import axios from "axios";
 import { useAuth } from "../../contexts/authContext";
+import { ICourse } from "../../models/ICourse";
 
 function UserDashboard() {
   const [userName, setUserName] = useState("");
@@ -22,16 +23,6 @@ function UserDashboard() {
       count: 0, // Initialize to 0, will be updated
       route: "/courses",
       buttonTitle: "View Courses",
-    },
-  ]);
-  const [courseManagementCards, setCourseManagementCards] = useState([
-    {
-      title: "Enroll New Course",
-      description:
-        "Efficiently design, implement, and oversee your courses with streamlined processes and comprehensive management tools.",
-      buttonText: "Enroll Now",
-      route: "/courses",
-      image: "/assets/EnrollCourse.jpg",
     },
   ]);
 
@@ -83,7 +74,7 @@ function UserDashboard() {
         console.error("Error fetching dashboard data:", error);
       }
     };
-  
+
     fetchUserName();
     fetchDashboardData();
 
@@ -178,7 +169,7 @@ function UserDashboard() {
         </h2>
         <div className="row">
           {featuredCourses.map((course) => (
-            <div className="col-md-4 mb-4" key={course.id}>
+            <div className="col-md-4 mb-4" key={course.courseId}>
               <div className="card" style={{ width: "18rem" }}>
                 <img
                   src="../src/assets/image/dashboard.jpg"
@@ -205,7 +196,7 @@ function UserDashboard() {
         </h2>
         <div className="row">
           {featuredCourses.map((course) => (
-            <div className="col-md-4 mb-4" key={course.id}>
+            <div className="col-md-4 mb-4" key={course.courseId}>
               <div className="card" style={{ width: "18rem" }}>
                 <img
                   src="../src/assets/image/dashboard.jpg"

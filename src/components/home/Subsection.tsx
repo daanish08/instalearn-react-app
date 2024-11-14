@@ -206,11 +206,6 @@ const Subsection = () => {
             </button>
           </div>
         </div>
-        {/* <div className="row px-4 ">
-          <div className="col-md-12">
-            <img src={footer} alt="img" />
-          </div>
-        </div> */}
       </div>
     </div>
   );

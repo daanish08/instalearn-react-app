@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
 import { ICourse } from "../../models/ICourse";
 import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useAuth } from "../../contexts/authContext";

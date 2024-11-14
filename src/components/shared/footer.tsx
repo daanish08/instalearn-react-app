@@ -6,17 +6,13 @@ const Footer = function () {
 
   // it must return jsx
   return (
-    <footer
-      className="text-center bg-navy"
-      style={{  color: "white" }}
-    >
+    <footer className="text-center bg-navy" style={{ color: "white" }}>
       <div>
-      <MenuList />
+        <MenuList userRole="" onLogout={() => {}} />
         <br />
         <p>
           <b>&copy;</b>Copyright {copyrightYear} | <b>INSTA LEARN</b>
         </p>
-        
       </div>
     </footer>
   );
