@@ -13,10 +13,12 @@ import {
 } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useAuth } from "../../contexts/authContext";
 
 const CourseForm = () => {
-  const adminId = 1;
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const userId = user?.id;
   const { id } = useParams<{ id: string }>();
   const [course, setCourse] = useState<ICourse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -54,8 +56,8 @@ const CourseForm = () => {
   const onSubmit = async (data: ICourse) => {
     console.log("Data being sent:", data);
     const url = id
-      ? `http://localhost:8080/instalearn/admin/A${adminId}/C${course?.courseId}/update`
-      : `http://localhost:8080/instalearn/admin/A${adminId}/addCourse`;
+      ? `http://localhost:8080/instalearn/admin/A${userId}/C${course?.courseId}/update`
+      : `http://localhost:8080/instalearn/admin/A${userId}/addCourse`;
 
     const method = id ? axios.put : axios.post;
 
