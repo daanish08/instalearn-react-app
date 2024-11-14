@@ -13,11 +13,11 @@ function Header() {
   
   return (
     <nav
-      className="navbar navbar-expand-md  bg-navy fixed-top pt-3"
+      className="navbar navbar-expand-md  bg-navy fixed-top pt-2"
     >
       <div className="container-fluid ">
-        <Link className="navbar-brand text-white" to="/">
-          INSTA LEARN APP
+        <Link className="navbar-brand text-white ps-3" to="/">
+         <img className="rounded"  width="100" height="60" src="/src/assets/image/logo.png"/>
         </Link>
         <button
           className="navbar-toggler"
