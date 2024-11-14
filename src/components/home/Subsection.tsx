@@ -40,7 +40,7 @@ const Subsection = () => {
   };
   return (
     <div className="">
-      <div className="px-3 bg-light-blue">
+      <div className="px-3 mt-4 bg-light-blue">
         <div
           className="px-4 py-5 my-3 mt-0 text-center text-white fw-semibold"
           id="home"
