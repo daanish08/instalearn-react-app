@@ -50,7 +50,7 @@ const LoginComponent = ({ userType }: LoginComponentProps) => {
         <img src={loginImg} width={600} height={580} />
       </div>
       <div className="col-md-6 d-flex py-5 justify-content-center">
-        <div className="card w-75 py-5 px-3 ">
+        <div className=" w-75 py-5 px-3 ">
           <div className="card-body">
             <form onSubmit={handleSubmit(onSubmit)}>
               <h2 className="text-center text-black mb-1 fw-light">
@@ -94,7 +94,7 @@ const LoginComponent = ({ userType }: LoginComponentProps) => {
                   })}
                 />
                 {errors.password && (
-                  <div className="text-danger">{errors.password.message}</div>
+                  <div className="text-danger py-1">{errors.password.message}</div>
                 )}
               </div>
               <button
@@ -112,7 +112,7 @@ const LoginComponent = ({ userType }: LoginComponentProps) => {
                     to={`/${userType}/signup`}
                     className="text-decoration-none text-navy border-bottom fw-semibold"
                   >
-                    Register here
+                   {" "} Register here
                   </Link>
                 </p>
               </div>

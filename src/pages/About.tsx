@@ -68,13 +68,13 @@ const About = () => {
       </Helmet>
       <div className="gradient-background text-navy">
         <div
-          className="px-4   mt-0 text-center"
-          style={{ paddingTop: "100px" }}
+          className="px-4 text-center"
+          style={{ marginTop:"30px",paddingTop: "100px" ,paddingBottom:"90px"}}
         >
-          <h1 className="text-navy fw-semibold  ">ABOUT</h1>
+          <h1 className="text-navy fw-bold display-4 pb-3">ABOUT</h1>
           <h3 className="display-5  pb-5  fw-semibold gradient-text">
-            "We are an online community dedicated to making language learning
-            engaging and accessible for everyone."
+            <i>"We are an online community dedicated to making language learning
+            engaging and accessible for everyone."</i>
           </h3>
           <button onClick={scrollToContent} className="btn btn-link p-0">
             <svg
